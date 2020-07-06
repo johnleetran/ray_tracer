@@ -279,3 +279,43 @@ TEST(Matrix3D, GetSubmatrix2)
     bool eq = (answer_matrix == result);
     EXPECT_EQ(eq, true);
 }
+
+TEST(Matrix3D, Minor1){
+    std::vector<std::vector<float>> mat1{
+        {3, 5, 0},
+        {2, -1, -7},
+        {6, -1, 5}};
+    float answer = 25.f;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float minor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 1, 0);
+
+    EXPECT_NEAR(answer, minor, 0.0001);
+}
+
+TEST(Matrix3D, Cofactor1)
+{
+    std::vector<std::vector<float>> mat1{
+        {3, 5, 0},
+        {2, -1, -7},
+        {6, -1, 5}};
+    float answer = -12.f;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float minor1 = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 0, 0);
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, Cofacto2)
+{
+    std::vector<std::vector<float>> mat1{
+        {3, 5, 0},
+        {2, -1, -7},
+        {6, -1, 5}};
+    float answer = -25.f;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float minor1 = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 1, 0);
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 1, 0);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}

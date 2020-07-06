@@ -62,6 +62,23 @@ namespace Ray_Tracer{
                 Matrix3D<T> tmp{new_mat};
                 return tmp;
             }
+
+            static T calculate_minor(const Matrix3D<T> mat, int row, int col)
+            {
+                Matrix3D<float> b = get_submatrix(mat, row, col);
+                float minor = Matrix3D<float>::calculate_determinant(b);
+                return minor;
+            }
+
+            static T calculate_cofactor(const Matrix3D<T> mat, int row, int col)
+            {
+                T minor = calculate_minor(mat, row, col);
+                if((row + col) % 2 == 1){
+                    return -1 * minor;
+                }else{
+                    return minor;
+                }
+            }
         };
 
         template <typename T>
