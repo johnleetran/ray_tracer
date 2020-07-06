@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
-#include "tuple3d_utils_test.hpp"
-#include "vec3d_utils_test.hpp"
+#include "tuple3d_test.hpp"
+#include "vec3d_test.hpp"
 
 float EPSILON = std::numeric_limits<float>::epsilon();
 

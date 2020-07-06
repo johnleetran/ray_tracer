@@ -8,13 +8,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(external/googletest)
 add_subdirectory(ray_tracer)
 
+
 add_executable(app main.cpp)
+add_compile_options(-Wno-unused-variable)
 target_sources(
     app 
     PRIVATE 
         main.cpp 
-        ray_tracer/include/tuple3d_utils.hpp
-        ray_tracer/include/vec3d_utils.hpp
+        ray_tracer/include/tuple3d.hpp
+        ray_tracer/include/vec3d.hpp
 )
 
 target_include_directories(app 
@@ -36,8 +38,8 @@ add_executable(cpp_test "")
 target_sources(cpp_test 
     PRIVATE 
         test.cpp 
-        tests/tuple3d_utils_test.hpp
-        tests/vec3d_utils_test.hpp
+        tests/tuple3d_test.hpp
+        tests/vec3d_test.hpp
         )
 
 target_include_directories(cpp_test 
