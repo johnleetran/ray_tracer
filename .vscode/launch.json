@@ -7,7 +7,7 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Only Ninja GTest Debug",
+            "name": "Ninja and Run",
             "program": "${workspaceFolder}/build/cpp_test",
             "args": [],
             "cwd": "${workspaceFolder}/build",

@@ -13,6 +13,7 @@ namespace Tuple3D{
         T y;
         T z;
         T w;
+        int size = 4;
         Tuple3D(T x, T y, T z, T w):x(x),y(y),z(z),w(w){}
         T magnitude()
         {
@@ -23,6 +24,26 @@ namespace Tuple3D{
 
             T mag = std::sqrt(new_x + new_y + new_z + new_w);
             return mag;
+        }
+
+        T getValueByIndex(int index) const
+        {
+            if(index == 0){
+                return x;
+            }
+            if (index == 1)
+            {
+                return y;
+            }
+            if (index == 2)
+            {
+                return z;
+            }
+            if (index == 3)
+            {
+                return w;
+            }
+            return 0;
         }
 
         Tuple3D<T> normalize()

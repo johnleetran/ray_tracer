@@ -2,6 +2,7 @@
 
 #include "canvas3d_test.hpp"
 #include "color3d_test.hpp"
+#include "matrix3d_test.hpp"
 #include "tuple3d_test.hpp"
 #include "vec3d_test.hpp"
 

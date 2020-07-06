@@ -9,6 +9,7 @@ list(APPEND
     SOURCES_FILES
         ray_tracer/include/canvas3d.hpp
         ray_tracer/include/color3d.hpp
+        ray_tracer/include/matrix3d.hpp
         ray_tracer/include/tuple3d.hpp
         ray_tracer/include/vec3d.hpp
 )

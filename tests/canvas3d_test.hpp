@@ -5,7 +5,6 @@
 
 #include "canvas3d.hpp"
 
-//Vec3D
 TEST(Canvas3D, Create)
 {
     int width = 10;
