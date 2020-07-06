@@ -319,3 +319,126 @@ TEST(Matrix3D, Cofacto2)
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix1)
+{
+    std::vector<std::vector<float>> mat1{
+        {1, 2, 6},
+        {-5, 8, -4},
+        {2, 6, 4}};
+    float answer = 56.f;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix2)
+{
+    std::vector<std::vector<float>> mat1{
+        {1, 2, 6},
+        {-5, 8, -4},
+        {2, 6, 4}};
+    float answer = 12.f;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix3)
+{
+    std::vector<std::vector<float>> mat1{
+        {1, 2, 6},
+        {-5, 8, -4},
+        {2, 6, 4}};
+    float answer = -46;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix4)
+{
+    std::vector<std::vector<float>> mat1{
+        {1, 2, 6},
+        {-5, 8, -4},
+        {2, 6, 4}};
+    float answer = -196;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(mat1);
+
+    EXPECT_NEAR(answer, determinant, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix5)
+{
+    std::vector<std::vector<float>> mat1{
+        {-2, -8, 3, 5},
+        {-3, 1, 7,  3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}
+    };
+    float answer = 690;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix6)
+{
+    std::vector<std::vector<float>> mat1{
+        {-2, -8, 3, 5},
+        {-3, 1, 7, 3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}};
+    float answer = 447;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix7)
+{
+    std::vector<std::vector<float>> mat1{
+        {-2, -8, 3, 5},
+        {-3, 1, 7, 3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}};
+    float answer = 210;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix8)
+{
+    std::vector<std::vector<float>> mat1{
+        {-2, -8, 3, 5},
+        {-3, 1, 7, 3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}};
+    float answer = 51;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 3);
+
+    EXPECT_NEAR(answer, cofactor, 0.0001);
+}
+
+TEST(Matrix3D, DeterminantCofactorLargeMatrix9)
+{
+    std::vector<std::vector<float>> mat1{
+        {-2, -8, 3, 5},
+        {-3, 1, 7, 3},
+        {1, 2, -9, 6},
+        {-6, 7, 7, -9}};
+    float answer = -4071;
+    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(mat1);
+
+    EXPECT_NEAR(answer, determinant, 0.0001);
+}

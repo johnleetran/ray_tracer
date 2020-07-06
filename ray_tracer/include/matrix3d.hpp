@@ -40,7 +40,17 @@ namespace Ray_Tracer{
             }
 
             static T calculate_determinant(Matrix3D<T> mat){
-                T determinant = (mat.matrix[0][0] * mat.matrix[1][1]) - (mat.matrix[0][1] * mat.matrix[1][0]);
+
+                T determinant = 0.0;
+                if(mat.row == 2 && mat.col == 2){
+                    determinant = (mat.matrix[0][0] * mat.matrix[1][1]) - (mat.matrix[0][1] * mat.matrix[1][0]);
+                }else{
+                    for (int i = 0; i < mat.col; i++)
+                    {
+                        T cofactor = Matrix3D::calculate_cofactor(mat, 0, i);
+                        determinant += (cofactor * mat.matrix[0][i]);
+                    }
+                }
                 return determinant;
             }
 
