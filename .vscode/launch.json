@@ -23,5 +23,15 @@
             "cwd": "${workspaceFolder}/build",
             "preLaunchTask": "Build"
         }
+        ,
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "App Debug",
+            "program": "${workspaceFolder}/build/app",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "Build"
+        }
     ]
 }

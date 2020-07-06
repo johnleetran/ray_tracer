@@ -5,6 +5,14 @@ project(app)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+list(APPEND 
+    SOURCES_FILES
+        ray_tracer/include/canvas3d.hpp
+        ray_tracer/include/color3d.hpp
+        ray_tracer/include/tuple3d.hpp
+        ray_tracer/include/vec3d.hpp
+)
+
 add_subdirectory(external/googletest)
 add_subdirectory(ray_tracer)
 
@@ -15,8 +23,7 @@ target_sources(
     app 
     PRIVATE 
         main.cpp 
-        ray_tracer/include/tuple3d.hpp
-        ray_tracer/include/vec3d.hpp
+        ${SOURCES_FILES}
 )
 
 target_include_directories(app 
@@ -38,9 +45,8 @@ add_executable(cpp_test "")
 target_sources(cpp_test 
     PRIVATE 
         test.cpp 
-        tests/tuple3d_test.hpp
-        tests/vec3d_test.hpp
-        )
+        ${SOURCES_FILES}
+)
 
 target_include_directories(cpp_test 
     PUBLIC 

@@ -63,7 +63,8 @@ namespace Ray_Tracer
         template <typename T>
         std::ostream &operator<<(std::ostream &output, const Vec3D<T> &t1)
         {
-            output << "x: " << t1.x << " y: " << t1.y << " z: " << t1.z << std::endl;
+            //output << "x: " << t1.x << " y: " << t1.y << " z: " << t1.z << std::endl;
+            output << t1.x << "," << t1.y << "," << t1.z;
             return output;
         }
 

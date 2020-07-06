@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include "canvas3d_test.hpp"
+#include "color3d_test.hpp"
 #include "tuple3d_test.hpp"
 #include "vec3d_test.hpp"
 

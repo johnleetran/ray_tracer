@@ -1,4 +1,9 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
+
+#include "canvas3d.hpp"
+#include "color3d.hpp"
 #include "vec3d.hpp"
 
 struct Projectile 
@@ -13,11 +18,16 @@ struct Evnironment
     Ray_Tracer::Vec3D::Vec3D<float> wind;
 };
 
+struct my_color{
+    int r;
+    int g;
+    int b;
+};
+
 Projectile tick(Projectile projectile, Evnironment env)
 {
     Ray_Tracer::Vec3D::Vec3D<float> new_position = projectile.position + projectile.velocity;
-    Ray_Tracer::Vec3D::Vec3D<float> new_velocity = projectile.velocity + env.gravity;
-    new_velocity = new_velocity + env.wind;
+    Ray_Tracer::Vec3D::Vec3D<float> new_velocity = projectile.velocity + env.gravity + env.wind;
     Projectile proj = {new_position, new_velocity};
     return proj;
 }
@@ -25,26 +35,30 @@ Projectile tick(Projectile projectile, Evnironment env)
 int main(int argc, char *argv[])
 {
     Ray_Tracer::Vec3D::Vec3D<float> position{0.f, 1.f, 0.f};
-    Ray_Tracer::Vec3D::Vec3D<float> velocity{1.f, 1.f, 0.f};
+    Ray_Tracer::Vec3D::Vec3D<float> velocity{1.f, 1.8f, 0.f};
     Projectile proj = {
         position,
-        velocity.normalize()
+        velocity.normalize() * 11.25f
     };
 
     Evnironment env = {
         Ray_Tracer::Vec3D::Vec3D<float>{0.f, -0.1f, 0.f},
         Ray_Tracer::Vec3D::Vec3D<float>{-0.01f, 0.f, 0.f}};
 
-    std::string x;
+    int width = 900;
+    int height = 550;
+    Ray_Tracer::Canvas3d::Canvas3d canvas{width, height};
+
     Projectile p = proj;
-    while (std::cin >> x)
+    float x = 0;
+    float y = 0;
+    while (p.position.y >= 0.0 && p.position.y < height && p.position.x < width)
     {
-        if (x == "q")
-        {
-            break;
-        }
+        Ray_Tracer::Color3D::Color3D<float> tmp_color{1.f, 1.f, 1.f};
+        canvas.write_pixels(p.position.x, p.position.y, tmp_color);
+        std::cout << p.position << std::endl;
         p = tick(p, env);
-        std::cout << "x: " << p.position << std::endl;
     }
+    canvas.canvas_to_ppm("./image.ppm");
     return 0;
 }

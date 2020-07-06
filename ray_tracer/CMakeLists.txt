@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #target_include_directories(ray_tracer PRIVATE includes)
 add_library(ray_tracer 
     STATIC
+        src/canvas3d.cpp
+        src/color3d.cpp
         src/tuple3d.cpp
         src/vec3d.cpp
 )

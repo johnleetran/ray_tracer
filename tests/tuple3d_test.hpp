@@ -2,7 +2,6 @@
 
 #include <string>
 #include "tuple3d.hpp"
-#include "vec3d.hpp"
 
 TEST(Tuples, Equale)
 {
