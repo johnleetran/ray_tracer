@@ -5,7 +5,7 @@
 
 #pragma once
 namespace Ray_Tracer{
-    std::string get_uuid()
+    static std::string get_uuid()
     {
         static std::random_device dev;
         static std::mt19937 rng(dev());
