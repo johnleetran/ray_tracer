@@ -1,6 +1,6 @@
 #include <cmath>
 #include <iostream>
-
+#include "vec3d.hpp"
 #pragma once
 
 namespace Ray_Tracer{
@@ -84,6 +84,18 @@ namespace Tuple3D{
         T new_y = t1.y + t2.y;
         T new_z = t1.z + t2.z;
         T new_w = t1.w + t2.w;
+
+        Tuple3D<T> sum{new_x, new_y, new_z, new_w};
+        return sum;
+    }
+
+    template <typename T>
+    Tuple3D<T> operator+(const Tuple3D<T> &t1, const Ray_Tracer::Vec3D::Vec3D<T> &t2)
+    {
+        T new_x = t1.x + t2.x;
+        T new_y = t1.y + t2.y;
+        T new_z = t1.z + t2.z;
+        T new_w = t1.w + 0;
 
         Tuple3D<T> sum{new_x, new_y, new_z, new_w};
         return sum;

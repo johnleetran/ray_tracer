@@ -5,11 +5,31 @@
     "tasks": [
         {
             "type": "shell",
-            "label": "cmake",
+            "label": "cmake debug",
             "command": "/usr/local/bin/cmake",
             "args": [
                 "-GNinja",
                 "-DCMAKE_BUILD_TYPE=Debug",
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "cmake release",
+            "command": "/usr/local/bin/cmake",
+            "args": [
+                "-GNinja",
+                "-DCMAKE_BUILD_TYPE=Release",
                 ".."
             ],
             "options": {
@@ -39,11 +59,18 @@
             }
         },
         {
-            "label": "Build",
+            "label": "Build Debug",
             "dependsOn": [
-                "cmake",
+                "cmake debug",
                 "ninja"
             ]
-        }
+        },
+        {
+            "label": "Build Release",
+            "dependsOn": [
+                "cmake release",
+                "ninja"
+            ]
+        },
     ]
 }

@@ -4,6 +4,8 @@
 
 #include "canvas3d.hpp"
 #include "color3d.hpp"
+#include "matrix3d.hpp"
+#include "tuple3d.hpp"
 #include "vec3d.hpp"
 
 struct Projectile 
@@ -32,14 +34,12 @@ Projectile tick(Projectile projectile, Evnironment env)
     return proj;
 }
 
-int main(int argc, char *argv[])
-{
+int projectile_program(){
     Ray_Tracer::Vec3D::Vec3D<float> position{0.f, 1.f, 0.f};
     Ray_Tracer::Vec3D::Vec3D<float> velocity{1.f, 1.8f, 0.f};
     Projectile proj = {
         position,
-        velocity.normalize() * 11.25f
-    };
+        velocity.normalize() * 11.25f};
 
     Evnironment env = {
         Ray_Tracer::Vec3D::Vec3D<float>{0.f, -0.1f, 0.f},
@@ -61,4 +61,9 @@ int main(int argc, char *argv[])
     }
     canvas.canvas_to_ppm("./image.ppm");
     return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    return projectile_program();
 }

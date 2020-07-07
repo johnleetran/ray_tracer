@@ -7,31 +7,39 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Ninja and Run",
-            "program": "${workspaceFolder}/build/cpp_test",
-            "args": [],
-            "cwd": "${workspaceFolder}/build",
-            "preLaunchTask": "ninja"
-        },
-        {
-            "type": "lldb",
-            "request": "launch",
-            "name": "GTest Debug",
+            "name": "Run Test Debug",
             "program": "${workspaceFolder}/build/cpp_test",
             "args": [
             ],
             "cwd": "${workspaceFolder}/build",
-            "preLaunchTask": "Build"
-        }
-        ,
+            "preLaunchTask": "Build Debug"
+        },
         {
             "type": "lldb",
             "request": "launch",
-            "name": "App Debug",
+            "name": "Run Test Release",
+            "program": "${workspaceFolder}/build/cpp_test",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "Build Release"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run App Debug",
             "program": "${workspaceFolder}/build/app",
             "args": [],
             "cwd": "${workspaceFolder}/build",
-            "preLaunchTask": "Build"
+            "preLaunchTask": "Build Debug"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Run App Release",
+            "program": "${workspaceFolder}/build/app",
+            "args": [],
+            "cwd": "${workspaceFolder}/build",
+            "preLaunchTask": "Build Release"
         }
     ]
 }
