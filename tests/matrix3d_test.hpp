@@ -577,7 +577,8 @@ TEST(Matrix3D, InverseReverse)
 }
 
 TEST(Matrix3D, Translation1){
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
     Ray_Tracer::Tuple3D::Tuple3D<float> p{-3, 4, 5, 1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
@@ -587,7 +588,8 @@ TEST(Matrix3D, Translation1){
 
 TEST(Matrix3D, Translation2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
     Ray_Tracer::Matrix3D::Matrix3D<float> inverse_transform = transform.get_inverse();
     Ray_Tracer::Tuple3D::Tuple3D<float> point{-3, 4, 5, 1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = inverse_transform * point;
@@ -598,7 +600,8 @@ TEST(Matrix3D, Translation2)
 
 TEST(Matrix3D, Translation3)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
     Ray_Tracer::Vec3D::Vec3D<float> vec{-3, 4, 5};
     Ray_Tracer::Vec3D::Vec3D<float> new_point = transform * vec;
     EXPECT_NEAR(new_point.x, -3, 0.001);
@@ -608,7 +611,8 @@ TEST(Matrix3D, Translation3)
 
 TEST(Matrix3D, ScalingPoint)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
     Ray_Tracer::Tuple3D::Tuple3D<float> p{-4, 6, 8};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -8, 0.001);
@@ -618,7 +622,8 @@ TEST(Matrix3D, ScalingPoint)
 
 TEST(Matrix3D, ScalingVector)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
     Ray_Tracer::Vec3D::Vec3D<float> p{-4, 6, 8};
     Ray_Tracer::Vec3D::Vec3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -8, 0.001);
@@ -628,7 +633,8 @@ TEST(Matrix3D, ScalingVector)
 
 TEST(Matrix3D, ScalingInverse)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
     Ray_Tracer::Matrix3D::Matrix3D<float> transform_inverse = transform.get_inverse();
 
     Ray_Tracer::Vec3D::Vec3D<float> v{-4, 6, 8};
@@ -640,7 +646,8 @@ TEST(Matrix3D, ScalingInverse)
 
 TEST(Matrix3D, ScalingReflection)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(-1, 1, 1);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(-1, 1, 1);
 
     Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
@@ -651,13 +658,10 @@ TEST(Matrix3D, ScalingReflection)
 
 TEST(Matrix3D, RotationX1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 4.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{  0, 
-                                            1, 
-                                            0,
-                                            1
-                                        };
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
     EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
@@ -666,12 +670,10 @@ TEST(Matrix3D, RotationX1)
 
 TEST(Matrix3D, RotationX2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 2.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          1,
-                                          0,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
@@ -680,12 +682,10 @@ TEST(Matrix3D, RotationX2)
 
 TEST(Matrix3D, RotationXInverse)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 4.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          1,
-                                          0,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
     Ray_Tracer::Matrix3D::Matrix3D<float> transform_inverse = transform.get_inverse();
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform_inverse * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
@@ -695,12 +695,10 @@ TEST(Matrix3D, RotationXInverse)
 
 TEST(Matrix3D, RotationY1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 4.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          0,
-                                          1,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,0,1,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
@@ -709,12 +707,10 @@ TEST(Matrix3D, RotationY1)
 
 TEST(Matrix3D, RotationY2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 2.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          0,
-                                          1,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,0,1,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 1, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
@@ -723,12 +719,10 @@ TEST(Matrix3D, RotationY2)
 
 TEST(Matrix3D, RotationZ1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 4.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          1,
-                                          0,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
@@ -737,14 +731,84 @@ TEST(Matrix3D, RotationZ1)
 
 TEST(Matrix3D, RotationZ2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 2.f);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
-                                          1,
-                                          0,
-                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
     Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -1, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
     EXPECT_NEAR(new_point.z, 0, 0.001);
+}
+
+TEST(Matrix3D, ShearingXY)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(1,0,0,0,0,0);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2,3,4,1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 5, 0.001);
+    EXPECT_NEAR(new_point.y, 3, 0.001);
+    EXPECT_NEAR(new_point.z, 4, 0.001);
+}
+
+TEST(Matrix3D, ShearingXZ)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+                Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 1, 0, 0, 0, 0);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2,3,4,1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 6, 0.001);
+    EXPECT_NEAR(new_point.y, 3, 0.001);
+    EXPECT_NEAR(new_point.z, 4, 0.001);
+}
+
+TEST(Matrix3D, ShearingYX)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
+                Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 1, 0, 0, 0);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 2, 0.001);
+    EXPECT_NEAR(new_point.y, 5, 0.001);
+    EXPECT_NEAR(new_point.z, 4, 0.001);
+}
+
+TEST(Matrix3D, ShearingYZ)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 1, 0, 0);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 2, 0.001);
+    EXPECT_NEAR(new_point.y, 7, 0.001);
+    EXPECT_NEAR(new_point.z, 4, 0.001);
+}
+
+TEST(Matrix3D, ShearingZX)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 0, 1, 0);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 2, 0.001);
+    EXPECT_NEAR(new_point.y, 3, 0.001);
+    EXPECT_NEAR(new_point.z, 6, 0.001);
+}
+
+TEST(Matrix3D, ShearingZY)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 0, 0, 1);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 2, 0.001);
+    EXPECT_NEAR(new_point.y, 3, 0.001);
+    EXPECT_NEAR(new_point.z, 7, 0.001);
 }

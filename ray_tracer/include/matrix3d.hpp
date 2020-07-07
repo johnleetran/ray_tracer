@@ -197,6 +197,18 @@ namespace Ray_Tracer{
                 tranlate_matrix.matrix[1][1] = std::cos(radians);
                 return tranlate_matrix;
             }
+
+            static Matrix3D<T> shearing(T xy, T xz, T yx, T yz, T zx, T zy)
+            {
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[0][1] = xy;
+                tranlate_matrix.matrix[0][2] = xz;
+                tranlate_matrix.matrix[1][0] = yx;
+                tranlate_matrix.matrix[1][2] = yz;
+                tranlate_matrix.matrix[2][0] = zx;
+                tranlate_matrix.matrix[2][1] = zy;
+                return tranlate_matrix;
+            }
         };
 
         template <typename T>
