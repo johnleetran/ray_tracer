@@ -812,3 +812,39 @@ TEST(Matrix3D, ShearingZY)
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 7, 0.001);
 }
+
+TEST(Matrix3D, Chaining1){
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{1, 0, 1};
+    Ray_Tracer::Matrix3D::Matrix3D<float> A =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 2.f );
+    Ray_Tracer::Matrix3D::Matrix3D<float> B =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(5,5,5);
+    Ray_Tracer::Matrix3D::Matrix3D<float> C =
+        Ray_Tracer::Matrix3D::Matrix3D<float>::translate(10, 5, 7);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p2{1, -1, 0};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p2_results = A * p;
+    EXPECT_NEAR(p2_results.x, p2.x, 0.001);
+    EXPECT_NEAR(p2_results.y, p2.y, 0.001);
+    EXPECT_NEAR(p2_results.z, p2.z, 0.001);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p3{5, -5, 0};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p3_results = B * p2;
+    EXPECT_NEAR(p3_results.x, p3.x, 0.001);
+    EXPECT_NEAR(p3_results.y, p3.y, 0.001);
+    EXPECT_NEAR(p3_results.z, p3.z, 0.001);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p4{15, 0, 7};
+    Ray_Tracer::Tuple3D::Tuple3D<float> p4_results = C * p3;
+    EXPECT_NEAR(p4_results.x, p4.x, 0.001);
+    EXPECT_NEAR(p4_results.y, p4.y, 0.001);
+    EXPECT_NEAR(p4_results.z, p4.z, 0.001);
+
+    Ray_Tracer::Matrix3D::Matrix3D<float> T = C * B * A;
+    Ray_Tracer::Tuple3D::Tuple3D<float> answer{15, 0, 7};
+    Ray_Tracer::Tuple3D::Tuple3D<float> results = T * p;
+
+    EXPECT_NEAR(answer.x, results.x, 0.001);
+    EXPECT_NEAR(answer.y, results.y, 0.001);
+    EXPECT_NEAR(answer.z, results.z, 0.005);
+}
