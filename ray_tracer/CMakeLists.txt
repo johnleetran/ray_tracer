@@ -6,9 +6,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(ray_tracer 
     STATIC
         src/canvas3d.cpp
-        src/color3d.cpp
-        src/matrix3d.cpp
-        src/ray3d.cpp
-        src/tuple3d.cpp
-        src/vec3d.cpp
 )

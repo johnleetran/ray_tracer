@@ -58,14 +58,14 @@ namespace Tuple3D{
             return normalized;
         }
 
-        T dot(Tuple3D<T> t1, Tuple3D<T> t2)
+        T dot(Tuple3D<T> t1)
         {
-            T x = t1.x * t2.x;
-            T y = t1.y * t2.y;
-            T z = t1.z * t2.z;
-            T w = t1.w * t2.w;
+            T new_x = t1.x * x;
+            T new_y = t1.y * y;
+            T new_z = t1.z * z;
+            T new_w = t1.w * w;
 
-            T dot = x + y + z + w;
+            T dot = new_x + new_y + new_z + new_w;
             return dot;
         }
     };

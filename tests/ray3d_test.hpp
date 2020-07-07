@@ -4,7 +4,9 @@
 #include <cmath>
 
 #include "ray3d.hpp"
+#include "sphere3d.hpp"
 #include "tuple3d.hpp"
+#include "util3d.hpp"
 #include "vec3d.hpp"
 
 TEST(Ray3D, Create)
@@ -54,4 +56,82 @@ TEST(Ray3D, Position)
     EXPECT_NEAR(position4.x, answer4.x, 0.0001);
     EXPECT_NEAR(position4.y, answer4.y, 0.0001);
     EXPECT_NEAR(position4.z, answer4.z, 0.0001);
+}
+
+TEST(Ray3D, SphereIntersect1){
+    Ray_Tracer::Tuple3D::Tuple3D<float> origin{0, 0, -5};
+    Ray_Tracer::Vec3D::Vec3D<float> direction{0, 0, 1};
+    Ray_Tracer::Ray3D::Ray3D<float> ray{origin, direction};
+
+    std::string uuid = Ray_Tracer::get_uuid();
+
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.0, uuid};
+
+    std::vector<float> intersection_points = ray.intersect(sphere);
+    EXPECT_NEAR(intersection_points[0], 4.0, 0.0001);
+    EXPECT_NEAR(intersection_points[1], 6.0, 0.0001);
+    EXPECT_GT(sphere.id.length(), 0);
+}
+
+TEST(Ray3D, SphereIntersect2)
+{
+    Ray_Tracer::Tuple3D::Tuple3D<float> origin{0, 1, -5};
+    Ray_Tracer::Vec3D::Vec3D<float> direction{0, 0, 1};
+    Ray_Tracer::Ray3D::Ray3D<float> ray{origin, direction};
+
+    std::string uuid = Ray_Tracer::get_uuid();
+
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.0, uuid};
+
+    std::vector<float> intersection_points = ray.intersect(sphere);
+    EXPECT_NEAR(intersection_points[0], 5.0, 0.0001);
+    EXPECT_NEAR(intersection_points[1], 5.0, 0.0001);
+    EXPECT_GT(sphere.id.length(), 0);
+}
+
+TEST(Ray3D, SphereIntersect3)
+{
+    Ray_Tracer::Tuple3D::Tuple3D<float> origin{0, 2, -5};
+    Ray_Tracer::Vec3D::Vec3D<float> direction{0, 0, 1};
+    Ray_Tracer::Ray3D::Ray3D<float> ray{origin, direction};
+
+    std::string uuid = Ray_Tracer::get_uuid();
+
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.0, uuid};
+
+    std::vector<float> intersection_points = ray.intersect(sphere);
+    EXPECT_EQ(intersection_points.size(), 0);
+    EXPECT_GT(sphere.id.length(), 0);
+}
+
+TEST(Ray3D, SphereIntersect4)
+{
+    Ray_Tracer::Tuple3D::Tuple3D<float> origin{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> direction{0, 0, 1};
+    Ray_Tracer::Ray3D::Ray3D<float> ray{origin, direction};
+
+    std::string uuid = Ray_Tracer::get_uuid();
+
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.0, uuid};
+
+    std::vector<float> intersection_points = ray.intersect(sphere);
+    EXPECT_NEAR(intersection_points[0], -1.0, 0.0001);
+    EXPECT_NEAR(intersection_points[1],  1.0, 0.0001);
+    EXPECT_GT(sphere.id.length(), 0);
+}
+
+TEST(Ray3D, SphereIntersect5)
+{
+    Ray_Tracer::Tuple3D::Tuple3D<float> origin{0, 0, 5};
+    Ray_Tracer::Vec3D::Vec3D<float> direction{0, 0, 1};
+    Ray_Tracer::Ray3D::Ray3D<float> ray{origin, direction};
+
+    std::string uuid = Ray_Tracer::get_uuid();
+
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.0, uuid};
+
+    std::vector<float> intersection_points = ray.intersect(sphere);
+    EXPECT_NEAR(intersection_points[0], -6.0, 0.0001);
+    EXPECT_NEAR(intersection_points[1], -4.0, 0.0001);
+    EXPECT_GT(sphere.id.length(), 0);
 }

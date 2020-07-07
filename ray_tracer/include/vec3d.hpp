@@ -2,7 +2,6 @@
 #include <iostream>
 
 #pragma once
-
 namespace Ray_Tracer
 {
     namespace Vec3D

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#pragma once
 namespace Ray_Tracer
 {
     namespace Canvas3d{
