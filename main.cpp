@@ -68,8 +68,8 @@ int projectile_program(){
 }
 
 int render_sphere(){
-    int width = 500;
-    int height = 500;
+    int width = 100;
+    int height = 100;
     Ray_Tracer::Canvas3d::Canvas3d canvas{width, height};
 
     Ray_Tracer::Color3D::Color3D<float> red{1.f, 0,0};
@@ -106,8 +106,8 @@ int render_sphere(){
             Ray_Tracer::Ray3D::Ray3D<float> ray{ray_origin, ray_direction.normalize()};
 
             std::optional<std::vector<float>> intersection_points = Ray_Tracer::Intersection3D<float>::intersect(ray, sphere);
-            if (x == 50){
-                std::cout << "pause" << std::endl;
+            if (x % 50 == 0){
+                std::cout << "x: " << x << " y: " << y << std::endl;
             }
             if (intersection_points){
                 Ray_Tracer::Intersection3D<float> intersection{intersection_points->at(0), sphere};
@@ -132,7 +132,6 @@ int render_sphere(){
             // }
             // // EXPECT_NEAR(intersection_points->at(0), -1.0, 0.0001);
             // // EXPECT_NEAR(intersection_points->at(1), 1.0, 0.0001);
-            std::cout << "x: " << x << " y: " << y << std::endl;
         }
     }
     canvas.canvas_to_ppm("./image.ppm");
