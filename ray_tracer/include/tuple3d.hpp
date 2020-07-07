@@ -14,7 +14,7 @@ namespace Tuple3D{
         T z;
         T w;
         int size = 4;
-        Tuple3D(T x, T y, T z, T w):x(x),y(y),z(z),w(w){}
+        Tuple3D(T x, T y, T z, T w = 1):x(x),y(y),z(z),w(w){}
         T magnitude()
         {
             T new_x = x * x;

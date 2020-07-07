@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include "./tuple3d.hpp"
+#include "./vec3d.hpp"
+
 #pragma once
 namespace Ray_Tracer{
     namespace Matrix3D{
@@ -29,7 +31,7 @@ namespace Ray_Tracer{
                 col = mat[0].size();
             }
 
-            void transpose(){
+            void transpose_mutation(){
                 Matrix3D<T> transpose_matrix{};
                 for(int i=0; i < row; i++){
                     for(int j=0; j < col; j++){
@@ -37,6 +39,19 @@ namespace Ray_Tracer{
                     }
                 }
                 matrix = transpose_matrix.matrix;
+            }
+
+            Matrix3D<T> transpose()
+            {
+                Matrix3D<T> transpose_matrix{};
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < col; j++)
+                    {
+                        transpose_matrix.matrix[j][i] = matrix[i][j];
+                    }
+                }
+                return transpose_matrix;
             }
 
             bool is_invertible()
@@ -60,7 +75,7 @@ namespace Ray_Tracer{
                     }
                 }
 
-                cofactor_matrix.transpose();
+                cofactor_matrix = cofactor_matrix.transpose();
                 float determinant = calculate_determinant(*this);
                 for (int i = 0; i < row; i++)
                 {
@@ -122,6 +137,35 @@ namespace Ray_Tracer{
                 }else{
                     return minor;
                 }
+            }
+
+            static Matrix3D<T> get_generic_identity_matrix(){
+                std::vector<std::vector<float>> id_mat{
+                    {1, 0, 0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 1, 0},
+                    {0, 0, 0, 1}};
+                Matrix3D<T> id_matrix { id_mat };
+                return id_matrix;
+            }
+
+            static Matrix3D<T> translate(T x, T y, T z){
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[0][3] = x;
+                tranlate_matrix.matrix[1][3] = y;
+                tranlate_matrix.matrix[2][3] = z;
+                tranlate_matrix.matrix[3][3] = 1;
+                return tranlate_matrix;
+            }
+
+            static Matrix3D<T> scaling(T x, T y, T z)
+            {
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[0][0] = x;
+                tranlate_matrix.matrix[1][1] = y;
+                tranlate_matrix.matrix[2][2] = z;
+                tranlate_matrix.matrix[3][3] = 1;
+                return tranlate_matrix;
             }
         };
 
@@ -187,6 +231,26 @@ namespace Ray_Tracer{
                 C.push_back(result);
             }
             Ray_Tracer::Tuple3D::Tuple3D<T> ret { C[0], C[1], C[2], C[3] };
+            return ret;
+        }
+
+        template <typename T>
+        Ray_Tracer::Vec3D::Vec3D<T> operator*(const Matrix3D<T> &A, const Ray_Tracer::Vec3D::Vec3D<T> &B)
+        {
+
+            std::vector<T> C{};
+
+            for (int i = 0; i < A.row; i++)
+            {
+                T result = 0;
+                for (int j = 0; j < B.size; j++)
+                {
+                    float tmp = (A.matrix[i][j] * B.getValueByIndex(j));
+                    result += tmp;
+                }
+                C.push_back(result);
+            }
+            Ray_Tracer::Vec3D::Vec3D<T> ret{C[0], C[1], C[2]};
             return ret;
         }
     }

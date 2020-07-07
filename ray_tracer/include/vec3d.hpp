@@ -15,7 +15,7 @@ namespace Ray_Tracer
             T x;
             T y;
             T z;
-
+            int size = 4;
             Vec3D(T x, T y, T z) : x(x), y(y), z(z){}
             T magnitude()
             {
@@ -57,6 +57,23 @@ namespace Ray_Tracer
 
                 Vec3D<T> crs = {x, y, z};
                 return crs;
+            }
+
+            T getValueByIndex(int index) const
+            {
+                if (index == 0)
+                {
+                    return x;
+                }
+                if (index == 1)
+                {
+                    return y;
+                }
+                if (index == 2)
+                {
+                    return z;
+                }
+                return 0;
             }
         };
 
