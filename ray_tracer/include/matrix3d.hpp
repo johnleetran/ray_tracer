@@ -167,6 +167,36 @@ namespace Ray_Tracer{
                 tranlate_matrix.matrix[3][3] = 1;
                 return tranlate_matrix;
             }
+
+            static Matrix3D<T> rotation_x(float radians)
+            {
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[1][1] =  std::cos(radians);
+                tranlate_matrix.matrix[1][2] = -std::sin(radians);
+                tranlate_matrix.matrix[2][1] =  std::sin(radians);
+                tranlate_matrix.matrix[2][2] =  std::cos(radians);
+                return tranlate_matrix;
+            }
+
+            static Matrix3D<T> rotation_y(float radians)
+            {
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[0][0] = std::cos(radians);
+                tranlate_matrix.matrix[0][2] = std::sin(radians);
+                tranlate_matrix.matrix[2][0] = -std::sin(radians);
+                tranlate_matrix.matrix[2][2] = std::cos(radians);
+                return tranlate_matrix;
+            }
+
+            static Matrix3D<T> rotation_z(float radians)
+            {
+                Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
+                tranlate_matrix.matrix[0][0] = std::cos(radians);
+                tranlate_matrix.matrix[0][1] = -std::sin(radians);
+                tranlate_matrix.matrix[1][0] = std::sin(radians);
+                tranlate_matrix.matrix[1][1] = std::cos(radians);
+                return tranlate_matrix;
+            }
         };
 
         template <typename T>

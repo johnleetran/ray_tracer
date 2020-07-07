@@ -6,6 +6,8 @@
 
 #include "matrix3d.hpp"
 
+const float pi = 3.14;
+
 TEST(Matrix3D, Create2x2)
 {
     std::vector<std::vector<float>> mat{
@@ -645,4 +647,104 @@ TEST(Matrix3D, ScalingReflection)
     EXPECT_NEAR(new_point.x, -2, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
+}
+
+TEST(Matrix3D, RotationX1)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 4.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{  0, 
+                                            1, 
+                                            0,
+                                            1
+                                        };
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 0, 0.001);
+    EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
+    EXPECT_NEAR(new_point.z, std::sqrt(2) / 2.f, 0.001);
+}
+
+TEST(Matrix3D, RotationX2)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 2.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          1,
+                                          0,
+                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 0, 0.001);
+    EXPECT_NEAR(new_point.y, 0, 0.001);
+    EXPECT_NEAR(new_point.z, 1, 0.001);
+}
+
+TEST(Matrix3D, RotationXInverse)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 4.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          1,
+                                          0,
+                                          1};
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform_inverse = transform.get_inverse();
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform_inverse * p;
+    EXPECT_NEAR(new_point.x, 0, 0.001);
+    EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
+    EXPECT_NEAR(new_point.z, -std::sqrt(2) / 2.f, 0.001);
+}
+
+TEST(Matrix3D, RotationY1)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 4.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          0,
+                                          1,
+                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, std::sqrt(2) / 2.f, 0.001);
+    EXPECT_NEAR(new_point.y, 0, 0.001);
+    EXPECT_NEAR(new_point.z, std::sqrt(2) / 2.f, 0.001);
+}
+
+TEST(Matrix3D, RotationY2)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 2.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          0,
+                                          1,
+                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, 1, 0.001);
+    EXPECT_NEAR(new_point.y, 0, 0.001);
+    EXPECT_NEAR(new_point.z, 0, 0.001);
+}
+
+TEST(Matrix3D, RotationZ1)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 4.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          1,
+                                          0,
+                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, -std::sqrt(2) / 2.f, 0.001);
+    EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
+    EXPECT_NEAR(new_point.z, 0, 0.001);
+}
+
+TEST(Matrix3D, RotationZ2)
+{
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform = Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 2.f);
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,
+                                          1,
+                                          0,
+                                          1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    EXPECT_NEAR(new_point.x, -1, 0.001);
+    EXPECT_NEAR(new_point.y, 0, 0.001);
+    EXPECT_NEAR(new_point.z, 0, 0.001);
 }
