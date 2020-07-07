@@ -39,7 +39,41 @@ namespace Ray_Tracer{
                 matrix = transpose_matrix.matrix;
             }
 
-            static T calculate_determinant(Matrix3D<T> mat){
+            bool is_invertible()
+            {
+                if(Matrix3D::calculate_determinant(matrix) == 0){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+            Matrix3D<T> get_inverse(){
+                if(!is_invertible()){
+                    return *this;
+                }
+
+                Matrix3D cofactor_matrix{};
+                for(int i=0; i<row; i++){
+                    for(int j=0; j<col; j++){
+                        cofactor_matrix.matrix[i][j] = calculate_cofactor( matrix, i, j );
+                    }
+                }
+
+                cofactor_matrix.transpose();
+                float determinant = calculate_determinant(*this);
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < col; j++)
+                    {
+                        cofactor_matrix.matrix[i][j] /= determinant;
+                    }
+                }
+                return cofactor_matrix;
+            }
+
+            static T calculate_determinant(Matrix3D<T> mat)
+            {
 
                 T determinant = 0.0;
                 if(mat.row == 2 && mat.col == 2){
@@ -94,7 +128,7 @@ namespace Ray_Tracer{
         template <typename T>
         bool isEqual(T x, T y)
         {
-            const T epsilon = 0.00001/* some small number such as 1e-5 */;
+            const T epsilon = 0.01/* some small number such as 1e-5 */;
             return std::abs(x - y) <= epsilon * std::abs(x);
             // see Knuth section 4.2.2 pages 217-218
         }
