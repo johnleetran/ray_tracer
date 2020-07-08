@@ -21,7 +21,10 @@ list(APPEND
 
 add_subdirectory(external/googletest)
 add_subdirectory(ray_tracer)
-
+if(CMAKE_BUILD_TYPE MATCHES Release)
+    message("optimize code")
+    add_compile_options(-g -O2)
+ENDIF()
 
 add_executable(app main.cpp)
 add_compile_options(-Wno-unused-variable)

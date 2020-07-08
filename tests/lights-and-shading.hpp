@@ -195,7 +195,7 @@ TEST(LightsAndShading, Lights1)
     Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
     Ray_Tracer::PointLight3D<float> light{light_position, intensity};
 
-    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::Material3D<float>::lighting(m, light, position, eyev, normalv);
 
     Ray_Tracer::Color3D::Color3D<float> answer{1.9, 1.9, 1.9};
 
@@ -218,7 +218,7 @@ TEST(LightsAndShading, Lights2)
     Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
     Ray_Tracer::PointLight3D<float> light{light_position, intensity};
 
-    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::Material3D<float>::lighting(m, light, position, eyev, normalv);
 
     Ray_Tracer::Color3D::Color3D<float> answer{1.0, 1.0, 1.0};
 
@@ -241,7 +241,7 @@ TEST(LightsAndShading, Lights3)
     Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
     Ray_Tracer::PointLight3D<float> light{light_position, intensity};
 
-    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::Material3D<float>::lighting(m, light, position, eyev, normalv);
 
     Ray_Tracer::Color3D::Color3D<float> answer{0.7364, 0.7364, 0.7364};
 
@@ -264,7 +264,7 @@ TEST(LightsAndShading, Lights4)
     Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
     Ray_Tracer::PointLight3D<float> light{light_position, intensity};
 
-    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::Material3D<float>::lighting(m, light, position, eyev, normalv);
 
     Ray_Tracer::Color3D::Color3D<float> answer{1.6364, 1.6364, 1.6364};
 
@@ -287,7 +287,7 @@ TEST(LightsAndShading, Lights5)
     Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
     Ray_Tracer::PointLight3D<float> light{light_position, intensity};
 
-    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::Material3D<float>::lighting(m, light, position, eyev, normalv);
 
     Ray_Tracer::Color3D::Color3D<float> answer{0.1, 0.1, 0.1};
 
