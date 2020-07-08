@@ -1,5 +1,10 @@
 {
-    "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+    "[cpp]": {
+        "editor.formatOnType": false
+    },
+    "[c]": {
+        "editor.formatOnType": false
+    },
     "files.associations": {
         "cctype": "cpp",
         "clocale": "cpp",

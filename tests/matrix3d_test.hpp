@@ -13,7 +13,7 @@ TEST(Matrix3D, Create2x2)
     std::vector<std::vector<float>> mat{
         {-3, 5},
         {1, -2}};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix{mat};
+    Ray_Tracer::Matrix3D<float> matrix{mat};
     for (int i; i < matrix.row; i++)
     {
         for (int j = 0; j < matrix.col; j++)
@@ -30,7 +30,7 @@ TEST(Matrix3D, Create3x3)
         {1, -2, -7},
         {0,  1 , 1}
     };
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix{mat};
+    Ray_Tracer::Matrix3D<float> matrix{mat};
     for (int i; i < matrix.row; i++)
     {
         for (int j = 0; j < matrix.col; j++)
@@ -48,7 +48,7 @@ TEST(Matrix3D, Create4x4)
         {  9,  10,  11,  12},
         {13.5,14.5,15.5,16.5}
     };
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix{mat};
+    Ray_Tracer::Matrix3D<float> matrix{mat};
     for (int i; i < matrix.row; i++){
         for (int j = 0; j < matrix.col; j++)
         {
@@ -69,8 +69,8 @@ TEST(Matrix3D, Equality1)
         {5, 6, 7, 8},
         {9, 8, 7, 6},
         {5, 4, 3, 2}};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
     bool result = (mat1 == mat2);
     EXPECT_EQ(result, true);
 }
@@ -87,8 +87,8 @@ TEST(Matrix3D, Equality2)
         {.5, .6, .7, .8},
         {.9, .8, .7, .6},
         {.5, .4, .30000001, .199999999}};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
     bool result = (mat1 == mat2);
     EXPECT_EQ(result, true);
 }
@@ -105,8 +105,8 @@ TEST(Matrix3D, Notquality1)
         {.5, .6, .7, .8},
         {.9, .8, .7, .6},
         {.5, .4, .3001, .199999}};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
     bool result = (mat1 == mat2);
     EXPECT_EQ(result, false);
 }
@@ -132,11 +132,11 @@ TEST(Matrix3D, Multply1)
         {40, 58, 110, 102},
         {16, 26, 46, 42}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> result = matrix1 * matrix2;
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix{answer};
+    Ray_Tracer::Matrix3D<float> result = matrix1 * matrix2;
+    Ray_Tracer::Matrix3D<float> answer_matrix{answer};
 
     bool eq = (result == answer_matrix);
     EXPECT_EQ(eq, true);
@@ -149,13 +149,13 @@ TEST(Matrix3D, MultplyTuple)
         {2, 4, 4, 2},
         {8, 6, 4, 1},
         {0, 0, 0, 1}};
-    Ray_Tracer::Tuple3D::Tuple3D<float> tup{1, 2, 3, 1};
+    Ray_Tracer::Tuple3D<float> tup{1, 2, 3, 1};
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> answer{18, 24, 33, 1};
+    Ray_Tracer::Tuple3D<float> answer{18, 24, 33, 1};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> result = matrix1 * tup;
+    Ray_Tracer::Tuple3D<float> result = matrix1 * tup;
 
     EXPECT_NEAR(result.x, answer.x, 0.0001);
     EXPECT_NEAR(result.y, answer.y, 0.0001);
@@ -176,10 +176,10 @@ TEST(Matrix3D, IdentifyMatrix)
         {0, 0, 1, 0},
         {0, 0, 0, 1}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> result = matrix1 * matrix2;
+    Ray_Tracer::Matrix3D<float> result = matrix1 * matrix2;
 
     bool eq = (result == matrix1);
     EXPECT_EQ(eq, true);
@@ -198,8 +198,8 @@ TEST(Matrix3D, Transpose)
         {3, 0, 5, 5},
         {0, 8, 3, 8}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix{answer};
 
     matrix1 = matrix1.transpose();
 
@@ -220,8 +220,8 @@ TEST(Matrix3D, TransposeIdentity)
         {0, 0, 1, 0},
         {0, 0, 0, 1}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix{answer};
 
     matrix1 = matrix1.transpose();
 
@@ -235,8 +235,8 @@ TEST(Matrix3D, CalculateDeterminant2x2)
         {1, 5},
         {-3, 2}};
     float answer = 17.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float result = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(matrix1);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float result = Ray_Tracer::Matrix3D<float>::calculate_determinant(matrix1);
     EXPECT_NEAR(answer, result, 0.0001);
 }
 
@@ -251,10 +251,10 @@ TEST(Matrix3D, GetSubmatrix1)
         {-3, 2},
         {0, 6}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix{answer};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> result = Ray_Tracer::Matrix3D::Matrix3D<float>::get_submatrix(matrix1, 0, 2);
+    Ray_Tracer::Matrix3D<float> result = Ray_Tracer::Matrix3D<float>::get_submatrix(matrix1, 0, 2);
     bool eq = (answer_matrix == result);
     EXPECT_EQ(eq, true);
 }
@@ -274,10 +274,10 @@ TEST(Matrix3D, GetSubmatrix2)
         {-7, -1, 1}
     };
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix{answer};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> result = Ray_Tracer::Matrix3D::Matrix3D<float>::get_submatrix(matrix1, 2, 1);
+    Ray_Tracer::Matrix3D<float> result = Ray_Tracer::Matrix3D<float>::get_submatrix(matrix1, 2, 1);
     bool eq = (answer_matrix == result);
     EXPECT_EQ(eq, true);
 }
@@ -288,8 +288,8 @@ TEST(Matrix3D, Minor1){
         {2, -1, -7},
         {6, -1, 5}};
     float answer = 25.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float minor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 1, 0);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float minor = Ray_Tracer::Matrix3D<float>::calculate_minor(mat1, 1, 0);
 
     EXPECT_NEAR(answer, minor, 0.0001);
 }
@@ -301,9 +301,9 @@ TEST(Matrix3D, Cofactor1)
         {2, -1, -7},
         {6, -1, 5}};
     float answer = -12.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float minor1 = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 0, 0);
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float minor1 = Ray_Tracer::Matrix3D<float>::calculate_minor(mat1, 0, 0);
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -315,9 +315,9 @@ TEST(Matrix3D, Cofacto2)
         {2, -1, -7},
         {6, -1, 5}};
     float answer = -25.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float minor1 = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_minor(mat1, 1, 0);
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 1, 0);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float minor1 = Ray_Tracer::Matrix3D<float>::calculate_minor(mat1, 1, 0);
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 1, 0);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -329,8 +329,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix1)
         {-5, 8, -4},
         {2, 6, 4}};
     float answer = 56.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -342,8 +342,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix2)
         {-5, 8, -4},
         {2, 6, 4}};
     float answer = 12.f;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -355,8 +355,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix3)
         {-5, 8, -4},
         {2, 6, 4}};
     float answer = -46;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -368,8 +368,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix4)
         {-5, 8, -4},
         {2, 6, 4}};
     float answer = -196;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(mat1);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float determinant = Ray_Tracer::Matrix3D<float>::calculate_determinant(mat1);
 
     EXPECT_NEAR(answer, determinant, 0.0001);
 }
@@ -383,8 +383,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix5)
         {-6, 7, 7, -9}
     };
     float answer = 690;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 0);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -397,8 +397,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix6)
         {1, 2, -9, 6},
         {-6, 7, 7, -9}};
     float answer = 447;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 1);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -411,8 +411,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix7)
         {1, 2, -9, 6},
         {-6, 7, 7, -9}};
     float answer = 210;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 2);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -425,8 +425,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix8)
         {1, 2, -9, 6},
         {-6, 7, 7, -9}};
     float answer = 51;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float cofactor = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_cofactor(mat1, 0, 3);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float cofactor = Ray_Tracer::Matrix3D<float>::calculate_cofactor(mat1, 0, 3);
 
     EXPECT_NEAR(answer, cofactor, 0.0001);
 }
@@ -439,8 +439,8 @@ TEST(Matrix3D, DeterminantCofactorLargeMatrix9)
         {1, 2, -9, 6},
         {-6, 7, 7, -9}};
     float answer = -4071;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(mat1);
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    float determinant = Ray_Tracer::Matrix3D<float>::calculate_determinant(mat1);
 
     EXPECT_NEAR(answer, determinant, 0.0001);
 }
@@ -455,10 +455,10 @@ TEST(Matrix3D, IsInvertible1)
     };
     bool answer = true;
     float determinant_answer = -2120;
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
     bool result = matrix1.is_invertible();
 
-    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(matrix1);
+    float determinant = Ray_Tracer::Matrix3D<float>::calculate_determinant(matrix1);
 
     EXPECT_NEAR(determinant_answer, determinant, 0.001);
     EXPECT_EQ(answer, result);
@@ -475,9 +475,9 @@ TEST(Matrix3D, IsInvertible2)
     bool answer = false;
     float determinant_answer = 0;
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
     bool result = matrix1.is_invertible();
-    float determinant = Ray_Tracer::Matrix3D::Matrix3D<float>::calculate_determinant(matrix1);
+    float determinant = Ray_Tracer::Matrix3D<float>::calculate_determinant(matrix1);
 
     EXPECT_NEAR(determinant_answer, determinant, 0.001);
     EXPECT_EQ(answer, result);
@@ -497,10 +497,10 @@ TEST(Matrix3D, Inverse1)
         {-0.07895, -0.22368, -0.05263, 0.19737},
         {-0.52256, -0.81391, -0.30075, 0.30639}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix1{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix1{answer};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
+    Ray_Tracer::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
 
     bool eq = (answer_matrix1 == matrix1_inverse);
     EXPECT_EQ(eq, true);
@@ -520,10 +520,10 @@ TEST(Matrix3D, Inverse2)
         {0.35897, 0.35897, 0.43590, 0.92308},
         {-0.69231, -0.69231, -0.76923, -1.92308}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix1{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix1{answer};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
+    Ray_Tracer::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
 
     bool eq = (answer_matrix1 == matrix1_inverse);
     EXPECT_EQ(eq, true);
@@ -543,10 +543,10 @@ TEST(Matrix3D, Inverse3)
         {-0.02901, -0.14630, -0.10926, 0.12963},
         {0.17778, 0.06667, -0.26667, 0.33333}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> answer_matrix1{answer};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> answer_matrix1{answer};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
+    Ray_Tracer::Matrix3D<float> matrix1_inverse = matrix1.get_inverse();
 
     bool eq = (answer_matrix1 == matrix1_inverse);
     EXPECT_EQ(eq, true);
@@ -566,21 +566,21 @@ TEST(Matrix3D, InverseReverse)
         { 7,  0,  5,  4},
         { 6, -2,  0,  5}};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix1{mat1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix2{mat2};
+    Ray_Tracer::Matrix3D<float> matrix1{mat1};
+    Ray_Tracer::Matrix3D<float> matrix2{mat2};
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> matrix3 = matrix1 * matrix2;
-    Ray_Tracer::Matrix3D::Matrix3D<float> results = matrix3 * matrix2.get_inverse();
+    Ray_Tracer::Matrix3D<float> matrix3 = matrix1 * matrix2;
+    Ray_Tracer::Matrix3D<float> results = matrix3 * matrix2.get_inverse();
 
     bool eq = (results == matrix1);
     EXPECT_EQ(eq, true);
 }
 
 TEST(Matrix3D, Translation1){
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{-3, 4, 5, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Tuple3D<float> p{-3, 4, 5, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
     EXPECT_NEAR(new_point.y, 1, 0.001);
     EXPECT_NEAR(new_point.z, 7, 0.001);
@@ -588,11 +588,11 @@ TEST(Matrix3D, Translation1){
 
 TEST(Matrix3D, Translation2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
-    Ray_Tracer::Matrix3D::Matrix3D<float> inverse_transform = transform.get_inverse();
-    Ray_Tracer::Tuple3D::Tuple3D<float> point{-3, 4, 5, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = inverse_transform * point;
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Matrix3D<float> inverse_transform = transform.get_inverse();
+    Ray_Tracer::Tuple3D<float> point{-3, 4, 5, 1};
+    Ray_Tracer::Tuple3D<float> new_point = inverse_transform * point;
     EXPECT_NEAR(new_point.x, -8, 0.001);
     EXPECT_NEAR(new_point.y, 7, 0.001);
     EXPECT_NEAR(new_point.z, 3, 0.001);
@@ -600,10 +600,10 @@ TEST(Matrix3D, Translation2)
 
 TEST(Matrix3D, Translation3)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::translate(5, -3, 2);
-    Ray_Tracer::Vec3D::Vec3D<float> vec{-3, 4, 5};
-    Ray_Tracer::Vec3D::Vec3D<float> new_point = transform * vec;
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::translate(5, -3, 2);
+    Ray_Tracer::Vec3D<float> vec{-3, 4, 5};
+    Ray_Tracer::Vec3D<float> new_point = transform * vec;
     EXPECT_NEAR(new_point.x, -3, 0.001);
     EXPECT_NEAR(new_point.y, 4, 0.001);
     EXPECT_NEAR(new_point.z, 5, 0.001);
@@ -611,10 +611,10 @@ TEST(Matrix3D, Translation3)
 
 TEST(Matrix3D, ScalingPoint)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{-4, 6, 8};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Tuple3D<float> p{-4, 6, 8};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -8, 0.001);
     EXPECT_NEAR(new_point.y, 18, 0.001);
     EXPECT_NEAR(new_point.z, 32, 0.001);
@@ -622,10 +622,10 @@ TEST(Matrix3D, ScalingPoint)
 
 TEST(Matrix3D, ScalingVector)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
-    Ray_Tracer::Vec3D::Vec3D<float> p{-4, 6, 8};
-    Ray_Tracer::Vec3D::Vec3D<float> new_point = transform * p;
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Vec3D<float> p{-4, 6, 8};
+    Ray_Tracer::Vec3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -8, 0.001);
     EXPECT_NEAR(new_point.y, 18, 0.001);
     EXPECT_NEAR(new_point.z, 32, 0.001);
@@ -633,12 +633,12 @@ TEST(Matrix3D, ScalingVector)
 
 TEST(Matrix3D, ScalingInverse)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(2, 3, 4);
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform_inverse = transform.get_inverse();
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::scaling(2, 3, 4);
+    Ray_Tracer::Matrix3D<float> transform_inverse = transform.get_inverse();
 
-    Ray_Tracer::Vec3D::Vec3D<float> v{-4, 6, 8};
-    Ray_Tracer::Vec3D::Vec3D<float> new_point = transform_inverse * v;
+    Ray_Tracer::Vec3D<float> v{-4, 6, 8};
+    Ray_Tracer::Vec3D<float> new_point = transform_inverse * v;
     EXPECT_NEAR(new_point.x, -2, 0.001);
     EXPECT_NEAR(new_point.y,  2, 0.001);
     EXPECT_NEAR(new_point.z,  2, 0.001);
@@ -646,11 +646,11 @@ TEST(Matrix3D, ScalingInverse)
 
 TEST(Matrix3D, ScalingReflection)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(-1, 1, 1);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::scaling(-1, 1, 1);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -2, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
@@ -658,11 +658,11 @@ TEST(Matrix3D, ScalingReflection)
 
 TEST(Matrix3D, RotationX1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 4.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_x( pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,1,0,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
     EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.z, std::sqrt(2) / 2.f, 0.001);
@@ -670,11 +670,11 @@ TEST(Matrix3D, RotationX1)
 
 TEST(Matrix3D, RotationX2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 2.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_x(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,1,0,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
     EXPECT_NEAR(new_point.z, 1, 0.001);
@@ -682,12 +682,12 @@ TEST(Matrix3D, RotationX2)
 
 TEST(Matrix3D, RotationXInverse)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x(pi / 4.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_x(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform_inverse = transform.get_inverse();
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform_inverse * p;
+    Ray_Tracer::Tuple3D<float> p{0,1,0,1};
+    Ray_Tracer::Matrix3D<float> transform_inverse = transform.get_inverse();
+    Ray_Tracer::Tuple3D<float> new_point = transform_inverse * p;
     EXPECT_NEAR(new_point.x, 0, 0.001);
     EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.z, -std::sqrt(2) / 2.f, 0.001);
@@ -695,11 +695,11 @@ TEST(Matrix3D, RotationXInverse)
 
 TEST(Matrix3D, RotationY1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 4.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_y(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,0,1,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,0,1,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
     EXPECT_NEAR(new_point.z, std::sqrt(2) / 2.f, 0.001);
@@ -707,11 +707,11 @@ TEST(Matrix3D, RotationY1)
 
 TEST(Matrix3D, RotationY2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_y(pi / 2.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_y(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,0,1,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,0,1,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 1, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
     EXPECT_NEAR(new_point.z, 0, 0.001);
@@ -719,11 +719,11 @@ TEST(Matrix3D, RotationY2)
 
 TEST(Matrix3D, RotationZ1)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 4.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_z(pi / 4.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,1,0,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.y, std::sqrt(2) / 2.f, 0.001);
     EXPECT_NEAR(new_point.z, 0, 0.001);
@@ -731,11 +731,11 @@ TEST(Matrix3D, RotationZ1)
 
 TEST(Matrix3D, RotationZ2)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_z(pi / 2.f);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::rotation_z(pi / 2.f);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{0,1,0,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{0,1,0,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, -1, 0.001);
     EXPECT_NEAR(new_point.y, 0, 0.001);
     EXPECT_NEAR(new_point.z, 0, 0.001);
@@ -743,11 +743,11 @@ TEST(Matrix3D, RotationZ2)
 
 TEST(Matrix3D, ShearingXY)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-            Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(1,0,0,0,0,0);
+    Ray_Tracer::Matrix3D<float> transform = 
+            Ray_Tracer::Matrix3D<float>::shearing(1,0,0,0,0,0);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2,3,4,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2,3,4,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 5, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
@@ -755,11 +755,11 @@ TEST(Matrix3D, ShearingXY)
 
 TEST(Matrix3D, ShearingXZ)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-                Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 1, 0, 0, 0, 0);
+    Ray_Tracer::Matrix3D<float> transform = 
+                Ray_Tracer::Matrix3D<float>::shearing(0, 1, 0, 0, 0, 0);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2,3,4,1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2,3,4,1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 6, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
@@ -767,11 +767,11 @@ TEST(Matrix3D, ShearingXZ)
 
 TEST(Matrix3D, ShearingYX)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform = 
-                Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 1, 0, 0, 0);
+    Ray_Tracer::Matrix3D<float> transform = 
+                Ray_Tracer::Matrix3D<float>::shearing(0, 0, 1, 0, 0, 0);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
     EXPECT_NEAR(new_point.y, 5, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
@@ -779,11 +779,11 @@ TEST(Matrix3D, ShearingYX)
 
 TEST(Matrix3D, ShearingYZ)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 1, 0, 0);
+    Ray_Tracer::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D<float>::shearing(0, 0, 0, 1, 0, 0);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
     EXPECT_NEAR(new_point.y, 7, 0.001);
     EXPECT_NEAR(new_point.z, 4, 0.001);
@@ -791,11 +791,11 @@ TEST(Matrix3D, ShearingYZ)
 
 TEST(Matrix3D, ShearingZX)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 0, 1, 0);
+    Ray_Tracer::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D<float>::shearing(0, 0, 0, 0, 1, 0);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 6, 0.001);
@@ -803,46 +803,46 @@ TEST(Matrix3D, ShearingZX)
 
 TEST(Matrix3D, ShearingZY)
 {
-    Ray_Tracer::Matrix3D::Matrix3D<float> transform =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::shearing(0, 0, 0, 0, 0, 1);
+    Ray_Tracer::Matrix3D<float> transform =
+        Ray_Tracer::Matrix3D<float>::shearing(0, 0, 0, 0, 0, 1);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{2, 3, 4, 1};
-    Ray_Tracer::Tuple3D::Tuple3D<float> new_point = transform * p;
+    Ray_Tracer::Tuple3D<float> p{2, 3, 4, 1};
+    Ray_Tracer::Tuple3D<float> new_point = transform * p;
     EXPECT_NEAR(new_point.x, 2, 0.001);
     EXPECT_NEAR(new_point.y, 3, 0.001);
     EXPECT_NEAR(new_point.z, 7, 0.001);
 }
 
 TEST(Matrix3D, Chaining1){
-    Ray_Tracer::Tuple3D::Tuple3D<float> p{1, 0, 1};
-    Ray_Tracer::Matrix3D::Matrix3D<float> A =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::rotation_x( pi / 2.f );
-    Ray_Tracer::Matrix3D::Matrix3D<float> B =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::scaling(5,5,5);
-    Ray_Tracer::Matrix3D::Matrix3D<float> C =
-        Ray_Tracer::Matrix3D::Matrix3D<float>::translate(10, 5, 7);
+    Ray_Tracer::Tuple3D<float> p{1, 0, 1};
+    Ray_Tracer::Matrix3D<float> A =
+        Ray_Tracer::Matrix3D<float>::rotation_x( pi / 2.f );
+    Ray_Tracer::Matrix3D<float> B =
+        Ray_Tracer::Matrix3D<float>::scaling(5,5,5);
+    Ray_Tracer::Matrix3D<float> C =
+        Ray_Tracer::Matrix3D<float>::translate(10, 5, 7);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p2{1, -1, 0};
-    Ray_Tracer::Tuple3D::Tuple3D<float> p2_results = A * p;
+    Ray_Tracer::Tuple3D<float> p2{1, -1, 0};
+    Ray_Tracer::Tuple3D<float> p2_results = A * p;
     EXPECT_NEAR(p2_results.x, p2.x, 0.001);
     EXPECT_NEAR(p2_results.y, p2.y, 0.001);
     EXPECT_NEAR(p2_results.z, p2.z, 0.001);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p3{5, -5, 0};
-    Ray_Tracer::Tuple3D::Tuple3D<float> p3_results = B * p2;
+    Ray_Tracer::Tuple3D<float> p3{5, -5, 0};
+    Ray_Tracer::Tuple3D<float> p3_results = B * p2;
     EXPECT_NEAR(p3_results.x, p3.x, 0.001);
     EXPECT_NEAR(p3_results.y, p3.y, 0.001);
     EXPECT_NEAR(p3_results.z, p3.z, 0.001);
 
-    Ray_Tracer::Tuple3D::Tuple3D<float> p4{15, 0, 7};
-    Ray_Tracer::Tuple3D::Tuple3D<float> p4_results = C * p3;
+    Ray_Tracer::Tuple3D<float> p4{15, 0, 7};
+    Ray_Tracer::Tuple3D<float> p4_results = C * p3;
     EXPECT_NEAR(p4_results.x, p4.x, 0.001);
     EXPECT_NEAR(p4_results.y, p4.y, 0.001);
     EXPECT_NEAR(p4_results.z, p4.z, 0.001);
 
-    Ray_Tracer::Matrix3D::Matrix3D<float> T = C * B * A;
-    Ray_Tracer::Tuple3D::Tuple3D<float> answer{15, 0, 7};
-    Ray_Tracer::Tuple3D::Tuple3D<float> results = T * p;
+    Ray_Tracer::Matrix3D<float> T = C * B * A;
+    Ray_Tracer::Tuple3D<float> answer{15, 0, 7};
+    Ray_Tracer::Tuple3D<float> results = T * p;
 
     EXPECT_NEAR(answer.x, results.x, 0.001);
     EXPECT_NEAR(answer.y, results.y, 0.001);

@@ -4,7 +4,6 @@
 #pragma once
 
 namespace Ray_Tracer{
-namespace Tuple3D{
     //my 3d tuples
     template <typename T>
     class Tuple3D {
@@ -90,7 +89,7 @@ namespace Tuple3D{
     }
 
     template <typename T>
-    Tuple3D<T> operator+(const Tuple3D<T> &t1, const Ray_Tracer::Vec3D::Vec3D<T> &t2)
+    Tuple3D<T> operator+(const Tuple3D<T> &t1, const Ray_Tracer::Vec3D<T> &t2)
     {
         T new_x = t1.x + t2.x;
         T new_y = t1.y + t2.y;
@@ -144,5 +143,4 @@ namespace Tuple3D{
         Tuple3D<T> div = {new_x, new_y, new_z, new_w};
         return div;
     }
-}
 } // namespace Ray_Tracer
