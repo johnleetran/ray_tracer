@@ -26,12 +26,14 @@ namespace Ray_Tracer
             }
 
             void write_pixels(int x, int y, Ray_Tracer::Color3D::Color3D<float> color){
-                colors[x][height - y] = color;
+                //colors[x][height - y] = color;
+                colors[x][y] = color;
             }
 
             Ray_Tracer::Color3D::Color3D<float> getPixel(int x, int y)
             {
-                return colors[x][height - y];
+                //return colors[x][height - y];
+                return colors[x][y];
             }
 
             int toInt(double x)

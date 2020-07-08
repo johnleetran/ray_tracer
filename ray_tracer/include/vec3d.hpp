@@ -74,6 +74,11 @@ namespace Ray_Tracer
                 }
                 return 0;
             }
+
+            static Vec3D<T> reflect(Vec3D<T> in, Vec3D<T> normal)
+            {
+                return (in - (normal * 2.f * in.dot(normal)));
+            }
         };
 
         template <typename T>

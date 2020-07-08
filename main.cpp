@@ -78,7 +78,9 @@ int render_sphere(){
 
     std::string uuid1 = "sphere";
     Ray_Tracer::Sphere3D::Sphere3D<float> sphere{1.f, uuid1};
-    //sphere.transform(scaling_matrix);
+    Ray_Tracer::Matrix3D::Matrix3D<float> transform_matrix = sphere.get_transform();
+    transform_matrix = transform_matrix.translate(1.f, 1.0, .0);
+    sphere.transform(transform_matrix);
 
     float wall_z = 10;
     float wall_size = 7.f;
@@ -116,22 +118,7 @@ int render_sphere(){
                 {
                     canvas.write_pixels(x, y, red);
                 }
-                else
-                {
-                    canvas.write_pixels(x, y, white);
-                }
             }
-  
-            //}else{
-            //    canvas.write_pixels(x, y, black);
-            //}
-
-            // std::optional<std::vector<float>> intersection_points = Ray_Tracer::Intersection3D<float>::intersect(ray, sphere);
-            // if (intersection_points){
-            //     canvas.write_pixels(static_cast<int>(x), 0, tmp_color);
-            // }
-            // // EXPECT_NEAR(intersection_points->at(0), -1.0, 0.0001);
-            // // EXPECT_NEAR(intersection_points->at(1), 1.0, 0.0001);
         }
     }
     canvas.canvas_to_ppm("./image.ppm");
@@ -141,6 +128,5 @@ int render_sphere(){
 int main(int argc, char *argv[])
 {
     //return projectile_program();
-
     return render_sphere();
 }

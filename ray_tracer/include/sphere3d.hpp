@@ -34,6 +34,16 @@ namespace Ray_Tracer
             {
                 transform_matrix = mat * transform_matrix;
             }
+
+            Ray_Tracer::Vec3D::Vec3D<T> normalize_at(Ray_Tracer::Tuple3D::Tuple3D<T> point)
+            {
+                Ray_Tracer::Tuple3D::Tuple3D<T> object_point = transform_matrix.get_inverse() * point;
+                Ray_Tracer::Tuple3D::Tuple3D<T> object_normal = object_point - origin;
+                Ray_Tracer::Tuple3D::Tuple3D<T> world_normal = transform_matrix.get_inverse().transpose() * object_normal;
+                world_normal.w = 0;
+                world_normal = world_normal.normalize();
+                return Ray_Tracer::Vec3D::Vec3D<T>{world_normal.x, world_normal.y, world_normal.z};
+            }
         };
     } // namespace Sphere3D
 } // namespace Ray_Tracer
