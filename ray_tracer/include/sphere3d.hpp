@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "material3d.hpp"
 #include "matrix3d.hpp"
 #include "tuple3d.hpp"
 #include "vec3d.hpp"
@@ -19,6 +20,7 @@ namespace Ray_Tracer
             std::string id;
             Ray_Tracer::Tuple3D::Tuple3D<T> origin{0,0,0};
             Ray_Tracer::Matrix3D::Matrix3D<T> transform_matrix{};
+            Ray_Tracer::Material3D<T> material{};
             Sphere3D() {}
 
             Sphere3D(float radius, std::string id) : radius(radius), id(id)

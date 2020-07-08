@@ -3,8 +3,11 @@
 #include <string>
 #include <cmath>
 
+#include "color3d.hpp"
 #include "intersection3d.hpp"
 #include "intersection3d_collection.hpp"
+#include "material3d.hpp"
+#include "point_light3d.hpp"
 #include "ray3d.hpp"
 #include "sphere3d.hpp"
 #include "tuple3d.hpp"
@@ -123,4 +126,172 @@ TEST(LightsAndShading, ReflectionSlantedSurface)
     EXPECT_NEAR(r.x, 1, 0.001);
     EXPECT_NEAR(r.y, 0, 0.001);
     EXPECT_NEAR(r.z, 0, 0.001);
+}
+
+TEST(LightsAndShading, PointLight)
+{
+    Ray_Tracer::Color3D::Color3D<float> intensity{1,1,1};
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0,0,0};
+    Ray_Tracer::PointLight3D<float> light{position, intensity};
+
+    EXPECT_NEAR(light.position.x, position.x, 0.001);
+    EXPECT_NEAR(light.position.y, position.y, 0.001);
+    EXPECT_NEAR(light.position.z, position.z, 0.001);
+}
+
+TEST(LightsAndShading, DefaultMaterial)
+{
+    Ray_Tracer::Material3D<float> material;
+    EXPECT_NEAR(material.color.r, 1, 0.0001);
+    EXPECT_NEAR(material.color.g, 1, 0.0001);
+    EXPECT_NEAR(material.color.b, 1, 0.0001);
+
+    EXPECT_NEAR(material.ambient, 0.1, 0.001);
+    EXPECT_NEAR(material.diffuse, 0.9, 0.001);
+    EXPECT_NEAR(material.specular, 0.9, 0.001);
+    EXPECT_NEAR(material.shininess, 200.0, 0.001);
+}
+
+TEST(LightsAndShading, SphereDefaultMaterial)
+{
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere;
+    Ray_Tracer::Material3D<float> material;
+
+    EXPECT_NEAR(sphere.material.color.r, material.color.r, 0.0001);
+    EXPECT_NEAR(sphere.material.color.g, material.color.g, 0.0001);
+    EXPECT_NEAR(sphere.material.color.b, material.color.b, 0.0001);
+
+    EXPECT_NEAR(sphere.material.ambient, material.ambient, 0.001);
+    EXPECT_NEAR(sphere.material.diffuse, material.diffuse, 0.001);
+    EXPECT_NEAR(sphere.material.specular, material.specular, 0.001);
+    EXPECT_NEAR(sphere.material.shininess, material.shininess, 0.001);
+}
+
+TEST(LightsAndShading, SphereAssignedMaterial)
+{
+    Ray_Tracer::Sphere3D::Sphere3D<float> sphere;
+    Ray_Tracer::Material3D<float> material;
+
+    sphere.material = material;
+
+    EXPECT_NEAR(sphere.material.color.r, material.color.r, 0.0001);
+    EXPECT_NEAR(sphere.material.color.g, material.color.g, 0.0001);
+    EXPECT_NEAR(sphere.material.color.b, material.color.b, 0.0001);
+
+    EXPECT_NEAR(sphere.material.ambient, material.ambient, 0.001);
+    EXPECT_NEAR(sphere.material.diffuse, material.diffuse, 0.001);
+    EXPECT_NEAR(sphere.material.specular, material.specular, 0.001);
+    EXPECT_NEAR(sphere.material.shininess, material.shininess, 0.001);
+}
+
+TEST(LightsAndShading, Lights1)
+{
+    Ray_Tracer::Material3D<float> m;
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> eyev{0, 0, -1};
+    Ray_Tracer::Vec3D::Vec3D<float> normalv{0, 0, -1};
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> light_position{0, 0, -10};
+    Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
+    Ray_Tracer::PointLight3D<float> light{light_position, intensity};
+
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+
+    Ray_Tracer::Color3D::Color3D<float> answer{1.9, 1.9, 1.9};
+
+    EXPECT_NEAR(answer.r, lighting.r, 0.0001);
+    EXPECT_NEAR(answer.g, lighting.g, 0.0001);
+    EXPECT_NEAR(answer.b, lighting.b, 0.0001);
+}
+
+TEST(LightsAndShading, Lights2)
+{
+
+    float non_axis = std::sqrt(2) / 2;
+
+    Ray_Tracer::Material3D<float> m;
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> eyev{0, non_axis, -non_axis};
+    Ray_Tracer::Vec3D::Vec3D<float> normalv{0, 0, -1};
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> light_position{0, 0, -10};
+    Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
+    Ray_Tracer::PointLight3D<float> light{light_position, intensity};
+
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+
+    Ray_Tracer::Color3D::Color3D<float> answer{1.0, 1.0, 1.0};
+
+    EXPECT_NEAR(answer.r, lighting.r, 0.0001);
+    EXPECT_NEAR(answer.g, lighting.g, 0.0001);
+    EXPECT_NEAR(answer.b, lighting.b, 0.0001);
+}
+
+TEST(LightsAndShading, Lights3)
+{
+
+    float non_axis = std::sqrt(2) / 2;
+
+    Ray_Tracer::Material3D<float> m;
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> eyev{0, 0, -1};
+    Ray_Tracer::Vec3D::Vec3D<float> normalv{0, 0, -1};
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> light_position{0, 10, -10};
+    Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
+    Ray_Tracer::PointLight3D<float> light{light_position, intensity};
+
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+
+    Ray_Tracer::Color3D::Color3D<float> answer{0.7364, 0.7364, 0.7364};
+
+    EXPECT_NEAR(answer.r, lighting.r, 0.0001);
+    EXPECT_NEAR(answer.g, lighting.g, 0.0001);
+    EXPECT_NEAR(answer.b, lighting.b, 0.0001);
+}
+
+TEST(LightsAndShading, Lights4)
+{
+
+    float non_axis = std::sqrt(2) / 2;
+
+    Ray_Tracer::Material3D<float> m;
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> eyev{0, -non_axis, -non_axis};
+    Ray_Tracer::Vec3D::Vec3D<float> normalv{0, 0, -1};
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> light_position{0, 10, -10};
+    Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
+    Ray_Tracer::PointLight3D<float> light{light_position, intensity};
+
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+
+    Ray_Tracer::Color3D::Color3D<float> answer{1.6364, 1.6364, 1.6364};
+
+    EXPECT_NEAR(answer.r, lighting.r, 0.0001);
+    EXPECT_NEAR(answer.g, lighting.g, 0.0001);
+    EXPECT_NEAR(answer.b, lighting.b, 0.0001);
+}
+
+TEST(LightsAndShading, Lights5)
+{
+
+    float non_axis = std::sqrt(2) / 2;
+
+    Ray_Tracer::Material3D<float> m;
+    Ray_Tracer::Tuple3D::Tuple3D<float> position{0, 0, 0};
+    Ray_Tracer::Vec3D::Vec3D<float> eyev{0, 0, -1};
+    Ray_Tracer::Vec3D::Vec3D<float> normalv{0, 0, -1};
+
+    Ray_Tracer::Tuple3D::Tuple3D<float> light_position{0, 0, 10};
+    Ray_Tracer::Color3D::Color3D<float> intensity{1, 1, 1};
+    Ray_Tracer::PointLight3D<float> light{light_position, intensity};
+
+    Ray_Tracer::Color3D::Color3D<float> lighting = Ray_Tracer::PointLight3D<float>::lighting(m, light, position, eyev, normalv);
+
+    Ray_Tracer::Color3D::Color3D<float> answer{0.1, 0.1, 0.1};
+
+    EXPECT_NEAR(answer.r, lighting.r, 0.0001);
+    EXPECT_NEAR(answer.g, lighting.g, 0.0001);
+    EXPECT_NEAR(answer.b, lighting.b, 0.0001);
 }

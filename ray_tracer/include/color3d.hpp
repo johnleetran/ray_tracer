@@ -62,5 +62,16 @@ namespace Ray_Tracer
             Color3D<T> c{new_r, new_g, new_b};
             return c;
         }
+
+        template <typename T>
+        Color3D<T> operator*(const Color3D<T> &t1, T multiplier)
+        {
+            T new_r = t1.r * multiplier;
+            T new_g = t1.g * multiplier;
+            T new_b = t1.b * multiplier;
+
+            Color3D<T> c{new_r, new_g, new_b};
+            return c;
+        }
     }
 }
