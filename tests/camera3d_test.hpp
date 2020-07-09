@@ -23,6 +23,6 @@ TEST(Camera, DefaultCamera){
     Tuple3D<float> to{0,0,-1};
     Vec3D<float> up{0,1,0};
     //Matrix3D<float> t = Matrix3D<float>::view_transform(from, to, up);
-    bool is_the_same = ( t == Matrix3D<float>::get_generic_identity_matrix());
+    //bool is_the_same = ( t == Matrix3D<float>::get_generic_identity_matrix());
 
 }
