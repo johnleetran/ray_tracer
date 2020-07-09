@@ -5,8 +5,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <thread>
 #include <vector>
-
 
 #pragma once
 using namespace Ray_Tracer;
@@ -20,7 +20,7 @@ namespace Ray_Tracer
         const int color_clamp = 255;
         //std::vector<Ray_Tracer::Color3D<float>> colors;
         std::vector<std::vector<Ray_Tracer::Color3D<T>>> colors;
-        Canvas3D(int width, int height) : width(width), height(height)
+        Canvas3D(T width, T height) : width(width), height(height)
         {
             for(int i = 0; i < width; i++){
                 colors.push_back(std::vector<Ray_Tracer::Color3D<T>>{});
@@ -42,6 +42,7 @@ namespace Ray_Tracer
                     Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
                     Color3D<T> c = world.color_at(ray);
                     write_pixels(x, y, c);
+                    std::cout << "x: " << x << " y: " << y << std::endl;
                 }
             }
             return colors;
@@ -68,7 +69,7 @@ namespace Ray_Tracer
 
         void canvas_to_ppm(std::string filename)
         {
-            FILE *f = fopen("image.ppm", "w"); // Write image to PPM file.
+            FILE *f = fopen(filename.c_str(), "w"); // Write image to PPM file.
             fprintf(f, "P3\n%d %d\n%d\n", width, height, color_clamp);
 
             for (int i = 0; i < height; i++)

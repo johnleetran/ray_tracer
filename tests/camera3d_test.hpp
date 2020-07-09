@@ -144,6 +144,8 @@ TEST(Camera, RenderMiddle)
     Canvas3D<float> canvas{11, 11};
     c.transform_matrix = Camera3D<float>::view_transform(from, to, up);
     canvas.render(c, w);
+    canvas.canvas_to_ppm("./image-test.ppm");
+
     float r = canvas.getPixel(5, 5).r;
     float g = canvas.getPixel(5, 5).g;
     float b = canvas.getPixel(5, 5).b;
@@ -151,4 +153,5 @@ TEST(Camera, RenderMiddle)
     EXPECT_NEAR(r, 0.38066, 0.001);
     EXPECT_NEAR(g, 0.47583, 0.001);
     EXPECT_NEAR(b, 0.2855, 0.001);
+
 }

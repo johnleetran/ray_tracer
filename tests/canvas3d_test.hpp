@@ -7,8 +7,8 @@
 
 TEST(Canvas3D, Create)
 {
-    int width = 10;
-    int height = 20;
+    float width = 10;
+    float height = 20;
     Ray_Tracer::Canvas3D<float> canvas {width, height};
     EXPECT_EQ(canvas.width, width);
     EXPECT_EQ(canvas.height, height);
@@ -25,8 +25,8 @@ TEST(Canvas3D, Create)
 
 TEST(Canvas3D, WritePixels)
 {
-    int width = 10;
-    int height = 20;
+    float width = 10;
+    float height = 20;
 
     int x = 2;
     int y = 3;

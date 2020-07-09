@@ -92,5 +92,9 @@ namespace Ray_Tracer
 
                 return the_color;
             }
+
+            void clear_objects(){
+                objects.clear();
+            }
     };
 }
