@@ -1,41 +1,59 @@
-#include <vector>
+#include "../include/camera3d.hpp"
 #include "../include/color3d.hpp"
+#include "../include/ray_for_pixel3d.hpp"
+#include "../include/world3d.hpp"
+
 #include <stdlib.h>
 #include <stdio.h>
+#include <vector>
+
 
 #pragma once
+using namespace Ray_Tracer;
 namespace Ray_Tracer
 {
-    class Canvas3d{
+    template <typename T>
+    class Canvas3D{
         public:
         int width;
         int height;
         const int color_clamp = 255;
         //std::vector<Ray_Tracer::Color3D<float>> colors;
-        std::vector<std::vector<Ray_Tracer::Color3D<float>>> colors;
-        Canvas3d(int width, int height) : width(width), height(height)
+        std::vector<std::vector<Ray_Tracer::Color3D<T>>> colors;
+        Canvas3D(int width, int height) : width(width), height(height)
         {
             for(int i = 0; i < width; i++){
-                colors.push_back(std::vector<Ray_Tracer::Color3D<float>>{});
+                colors.push_back(std::vector<Ray_Tracer::Color3D<T>>{});
                 for (int j = 0; j < height; j++)
                 {
-                    colors[i].push_back(Ray_Tracer::Color3D<float>(0.f, 0.f, 0.f));
+                    colors[i].push_back(Ray_Tracer::Color3D<T>(0.f, 0.f, 0.f));
                 }
             }
         }
 
-        void write_pixels(int x, int y, Ray_Tracer::Color3D<float> color){
+        void write_pixels(int x, int y, Ray_Tracer::Color3D<T> color){
             //colors[x][height - y] = color;
             colors[x][y] = color;
         }
 
-        Ray_Tracer::Color3D<float> getPixel(int x, int y)
+        std::vector<std::vector<Color3D<T>>> render(Camera3D<T> camera, World3D<T> world){
+            for(int y = 0; y < camera.vsize; y++){
+                for(int x =0; x < camera.hsize; x++){
+                    Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
+                    Color3D<T> c = world.color_at(ray);
+                    write_pixels(x, y, c);
+                }
+            }
+            return colors;
+        }
+
+        Ray_Tracer::Color3D<T> getPixel(int x, int y)
         {
             //return colors[x][height - y];
             return colors[x][y];
         }
 
-        int toInt(double x)
+        int toInt(T x)
         {
             int val = std::floor(x * 255);
             if(val > color_clamp){

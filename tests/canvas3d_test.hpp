@@ -9,7 +9,7 @@ TEST(Canvas3D, Create)
 {
     int width = 10;
     int height = 20;
-    Ray_Tracer::Canvas3d canvas {width, height};
+    Ray_Tracer::Canvas3D<float> canvas {width, height};
     EXPECT_EQ(canvas.width, width);
     EXPECT_EQ(canvas.height, height);
 
@@ -32,7 +32,7 @@ TEST(Canvas3D, WritePixels)
     int y = 3;
 
     Ray_Tracer::Color3D<float> red{1.f, 0.f, 0.f};
-    Ray_Tracer::Canvas3d canvas{width, height};
+    Ray_Tracer::Canvas3D<float> canvas{width, height};
 
     canvas.write_pixels(x, y, red);
     EXPECT_NEAR(canvas.getPixel(x, y).r, red.r, 0.0001);

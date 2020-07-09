@@ -15,8 +15,9 @@ namespace Ray_Tracer{
         public:
             Ray_Tracer::Tuple3D<T> origin;
             Ray_Tracer::Vec3D<T> direction;
-            
-            Ray3D(Ray_Tracer::Tuple3D<T> origin, Ray_Tracer::Vec3D<T> direction) : origin(origin), direction(direction){ }
+
+            Ray3D(){}
+            Ray3D(Ray_Tracer::Tuple3D<T> origin, Ray_Tracer::Vec3D<T> direction) : origin(origin), direction(direction) {}
 
             Ray_Tracer::Tuple3D<T> position(float t)
             {

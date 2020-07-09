@@ -8,6 +8,7 @@
 #include "../include/material3d.hpp"
 #include "../include/matrix3d.hpp"
 #include "../include/point_light3d.hpp"
+#include "../include/ray_for_pixel3d.hpp"
 #include "../include/ray3d.hpp"
 #include "../include/sphere3d.hpp"
 #include "../include/tuple3d.hpp"

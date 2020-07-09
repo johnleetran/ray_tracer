@@ -139,7 +139,7 @@ namespace Ray_Tracer{
         }
 
         static Matrix3D<T> get_generic_identity_matrix(){
-            std::vector<std::vector<float>> id_mat{
+            std::vector<std::vector<T>> id_mat{
                 {1, 0, 0, 0},
                 {0, 1, 0, 0},
                 {0, 0, 1, 0},

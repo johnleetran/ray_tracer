@@ -16,6 +16,7 @@ list(APPEND
         ray_tracer/include/material3d.hpp
         ray_tracer/include/matrix3d.hpp
         ray_tracer/include/point_light3d.hpp
+        ray_tracer/include/ray_for_pixel3d.hpp
         ray_tracer/include/ray3d.hpp
         ray_tracer/include/tuple3d.hpp
         ray_tracer/include/vec3d.hpp
