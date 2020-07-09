@@ -23,6 +23,12 @@
             return inter;
         }
 
+        void sort(){
+            std::sort(collection.begin(), collection.end(), [](const Intersection3D<T> &a, const Intersection3D<T> &b) -> bool {
+                return a.t < b.t;
+            });
+        } 
+
         Intersection3D<T> get(int index){
             return collection[index];
         }

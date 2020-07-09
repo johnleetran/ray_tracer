@@ -13,6 +13,7 @@ namespace Ray_Tracer{
         T z;
         T w;
         int size = 4;
+        Tuple3D() : x(0), y(0), z(0), w(0){};
         Tuple3D(T x, T y, T z, T w = 1):x(x),y(y),z(z),w(w){}
         T magnitude()
         {

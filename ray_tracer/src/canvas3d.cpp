@@ -1,6 +1,7 @@
 #include "../include/canvas3d.hpp"
 
 //hack so i dont have to create new cpp for everything
+#include "../include/camera3d.hpp"
 #include "../include/color3d.hpp"
 #include "../include/intersection3d.hpp"
 #include "../include/intersection3d_collection.hpp"
@@ -11,3 +12,4 @@
 #include "../include/sphere3d.hpp"
 #include "../include/tuple3d.hpp"
 #include "../include/vec3d.hpp"
+#include "../include/world3d.hpp"

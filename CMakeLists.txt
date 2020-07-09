@@ -8,7 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 list(APPEND 
     SOURCES_FILES
         ray_tracer/include/canvas3d.hpp
+        ray_tracer/include/camera3d.hpp
         ray_tracer/include/color3d.hpp
+        ray_tracer/include/comps3d.hpp
         ray_tracer/include/intersection3d.hpp
         ray_tracer/include/intersection3d_collection.hpp
         ray_tracer/include/material3d.hpp
@@ -17,7 +19,8 @@ list(APPEND
         ray_tracer/include/ray3d.hpp
         ray_tracer/include/tuple3d.hpp
         ray_tracer/include/vec3d.hpp
-)
+        ray_tracer/include/world3d.hpp
+        )
 
 add_subdirectory(external/googletest)
 add_subdirectory(ray_tracer)

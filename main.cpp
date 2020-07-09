@@ -187,7 +187,7 @@ int render_sphere_with_lights(Ray_Tracer::Canvas3d *canvas, int width, int heigh
                 {
                     std::optional<Ray_Tracer::Intersection3D<float>> hit = intersection_collection.get_hit();
                     Ray_Tracer::Tuple3D<float> point = ray.position(hit->t);
-                    Ray_Tracer::Vec3D<float> normal = hit->object.normalize_at(point);
+                    Ray_Tracer::Vec3D<float> normal = hit->object.normal_at(point);
                     Ray_Tracer::Vec3D<float> eye = -ray.direction;
                     Ray_Tracer::Color3D<float> color = Ray_Tracer::Material3D<float>::lighting(hit->object.material, light, point, eye, normal);
                     canvas->write_pixels(x, y, color);

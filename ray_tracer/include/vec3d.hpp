@@ -12,6 +12,8 @@ namespace Ray_Tracer
         T y;
         T z;
         int size = 4;
+
+        Vec3D() : x(0), y(0), z(0) {}
         Vec3D(T x, T y, T z) : x(x), y(y), z(z){}
         T magnitude()
         {

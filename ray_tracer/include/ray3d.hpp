@@ -29,5 +29,7 @@ namespace Ray_Tracer{
                 Ray3D ray{new_origin, new_direction};
                 return ray;
             }
+
+            
     };
 }

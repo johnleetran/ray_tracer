@@ -17,7 +17,7 @@
 TEST(LightsAndShading, ComputeSphereNormalsX){
     Ray_Tracer::Sphere3D<float> sphere{1.0, "sphere"};
     Ray_Tracer::Tuple3D<float> point{1,0,0};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
     Ray_Tracer::Vec3D<float> answer{1, 0, 0};
     EXPECT_NEAR(n.x, answer.x, 0.001);
     EXPECT_NEAR(n.y, answer.y, 0.001);
@@ -28,7 +28,7 @@ TEST(LightsAndShading, ComputeSphereNormalsY)
 {
     Ray_Tracer::Sphere3D<float> sphere{1.0, "sphere"};
     Ray_Tracer::Tuple3D<float> point{0, 1, 0};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
     Ray_Tracer::Vec3D<float> answer{0, 1, 0};
     EXPECT_NEAR(n.x, answer.x, 0.001);
     EXPECT_NEAR(n.y, answer.y, 0.001);
@@ -39,7 +39,7 @@ TEST(LightsAndShading, ComputeSphereNormalsZ)
 {
     Ray_Tracer::Sphere3D<float> sphere{1.0, "sphere"};
     Ray_Tracer::Tuple3D<float> point{0, 0, 1};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
     Ray_Tracer::Vec3D<float> answer{0, 0, 1};
     EXPECT_NEAR(n.x, answer.x, 0.001);
     EXPECT_NEAR(n.y, answer.y, 0.001);
@@ -52,7 +52,7 @@ TEST(LightsAndShading, ComputeSphereNormalsNonAxis)
 
     Ray_Tracer::Sphere3D<float> sphere{1.0, "sphere"};
     Ray_Tracer::Tuple3D<float> point{non_axis, non_axis, non_axis};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
     Ray_Tracer::Vec3D<float> answer{non_axis, non_axis, non_axis};
     EXPECT_NEAR(n.x, answer.x, 0.001);
     EXPECT_NEAR(n.y, answer.y, 0.001);
@@ -65,7 +65,7 @@ TEST(LightsAndShading, NormalIsANormlizedVector)
 
     Ray_Tracer::Sphere3D<float> sphere{1.0, "sphere"};
     Ray_Tracer::Tuple3D<float> point{non_axis, non_axis, non_axis};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
     Ray_Tracer::Vec3D<float> nn = n.normalize();
 
     EXPECT_NEAR(n.x, nn.x, 0.001);
@@ -80,7 +80,7 @@ TEST(LightsAndShading, NormalTranslatedSphere)
     transform_matrix = transform_matrix.translate(0, 1, 0);
     sphere.transform(transform_matrix);
     Ray_Tracer::Tuple3D<float> point{0, 1.70711, -0.70711};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
 
     EXPECT_NEAR(n.x, 0, 0.001);
     EXPECT_NEAR(n.y, 0.70711, 0.001);
@@ -97,7 +97,7 @@ TEST(LightsAndShading, NormalScaledAndRotatedSphere)
     transform_matrix = transform_matrix.scaling(1, 0.5, 1) * transform_matrix.rotation_z(3.14/5);
     sphere.transform(transform_matrix);
     Ray_Tracer::Tuple3D<float> point{0, non_axis, -non_axis};
-    Ray_Tracer::Vec3D<float> n = sphere.normalize_at(point);
+    Ray_Tracer::Vec3D<float> n = sphere.normal_at(point);
 
     EXPECT_NEAR(n.x, 0, 0.001);
     EXPECT_NEAR(n.y, 0.97014, 0.001);

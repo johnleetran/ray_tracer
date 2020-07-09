@@ -9,6 +9,7 @@ namespace Ray_Tracer{
         public:
         Ray_Tracer::Color3D<T> intensity;
         Ray_Tracer::Tuple3D<T> position;
+        PointLight3D(){};
         PointLight3D(Ray_Tracer::Tuple3D<T> position, Ray_Tracer::Color3D<T> intensity) : position(position), intensity(intensity) {}
     };
 }
