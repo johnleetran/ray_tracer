@@ -229,10 +229,10 @@ int render_sphere_with_lights_threads()
     // render_sphere_with_lights(width, height, 0, width, 150, 199);
 }
 
-int render_room_with_sphere()
+int render_room_with_sphere(float width, float height)
 {
-    float width = 200;
-    float height = 100;
+    // float width = 100;
+    // float height = 50;
 
     //floor
     Sphere3D<float> floor{1.f, "floor"};
@@ -312,5 +312,12 @@ int main(int argc, char *argv[])
     //return render_sphere();
     //return render_sphere_with_lights_threads();
 
-    return render_room_with_sphere();
+    if(argc < 3){
+        std::cout << "usage: ./app <width> <height>" << std::endl;
+        return 1;
+    }
+    int width = std::atoi(argv[1]);
+    int height = std::atoi(argv[2]);
+
+    return render_room_with_sphere(width * 1.f, height * 1.f);
 }

@@ -59,19 +59,19 @@ namespace Ray_Tracer
             int offset = camera.vsize / 4;
 
             auto h1 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, 0, offset);
+                render_helper(camera, world, 0, camera.hsize, 0, offset, true);
             });
 
             auto h2 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset, offset*2);
+                render_helper(camera, world, 0, camera.hsize, offset, offset*2, false);
             });
 
             auto h3 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset * 2, offset * 3);
+                render_helper(camera, world, 0, camera.hsize, offset * 2, offset * 3, false);
             });
 
             auto h4 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset * 3, camera.vsize);
+                render_helper(camera, world, 0, camera.hsize, offset * 3, camera.vsize, false);
             });
 
             h1.get();
@@ -83,7 +83,7 @@ namespace Ray_Tracer
             return colors;
         }
 
-        std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int from_x, int to_x, int from_y, int to_y)
+        std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int from_x, int to_x, int from_y, int to_y, bool enable_preview)
         {
             for (int y = from_y; y < to_y; y++)
             {
