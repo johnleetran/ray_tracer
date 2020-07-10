@@ -5,10 +5,11 @@
 
 #include <atomic>
 #include <future>
-#include <unordered_map>
+#include <numeric>
 #include <stdlib.h>
 #include <stdio.h>
 #include <thread>
+#include <unordered_map>
 #include <vector>
 
 #pragma once
@@ -85,6 +86,7 @@ namespace Ray_Tracer
 
         std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int from_x, int to_x, int from_y, int to_y, bool enable_preview)
         {
+            int count = 0;
             for (int y = from_y; y < to_y; y++)
             {
                 for (int x = from_x; x < to_x; x++)
@@ -92,13 +94,14 @@ namespace Ray_Tracer
                     Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
                     Color3D<T> c = world.color_at(ray);
                     write_pixels(x, y, c);
-                    std::cout << "x: " << x << " y: " << y << std::endl;
-                    if (x == to_x - 1)
+                    if (enable_preview && count % 200 == 0)
                     {
+                        std::cout << "x: " << x << " y: " << y << std::endl;
                         mtx.lock();
                         canvas_to_ppm("./preview.ppm");
                         mtx.unlock();
                     }
+                    count++;
                 }
             }
             canvas_to_ppm("./image.ppm");

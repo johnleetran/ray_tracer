@@ -27,7 +27,7 @@ add_subdirectory(external/googletest)
 add_subdirectory(ray_tracer)
 if(CMAKE_BUILD_TYPE MATCHES Release)
     message("optimize code")
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+    set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 endif()
 
 add_executable(app main.cpp)

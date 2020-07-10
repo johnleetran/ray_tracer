@@ -28,7 +28,10 @@
             "request": "launch",
             "name": "Run App Debug",
             "program": "${workspaceFolder}/build/app",
-            "args": [],
+            "args": [
+                "50",
+                "25"
+            ],
             "cwd": "${workspaceFolder}/build",
             "preLaunchTask": "Build Debug"
         },
@@ -37,7 +40,10 @@
             "request": "launch",
             "name": "Run App Release",
             "program": "${workspaceFolder}/build/app",
-            "args": [],
+            "args": [
+                "50",
+                "25"
+            ],
             "cwd": "${workspaceFolder}/build",
             "preLaunchTask": "Build Release"
         }
