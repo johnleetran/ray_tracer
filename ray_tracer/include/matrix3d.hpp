@@ -53,7 +53,7 @@ namespace Ray_Tracer{
             return transpose_matrix;
         }
 
-        bool is_invertible()
+        bool is_invertible() const
         {
             if(Matrix3D::calculate_determinant(matrix) == 0){
                 return false;
@@ -62,7 +62,7 @@ namespace Ray_Tracer{
             }
         }
 
-        Matrix3D<T> get_inverse(){
+        Matrix3D<T> get_inverse() const{
             if(!is_invertible()){
                 return *this;
             }
@@ -86,7 +86,7 @@ namespace Ray_Tracer{
             return cofactor_matrix;
         }
 
-        static T calculate_determinant(Matrix3D<T> mat)
+        static T calculate_determinant(const Matrix3D<T> &mat)
         {
 
             T determinant = 0.0;
@@ -102,7 +102,7 @@ namespace Ray_Tracer{
             return determinant;
         }
 
-        static Matrix3D<T> get_submatrix(const Matrix3D<T> mat, int remove_row, int remove_col)
+        static Matrix3D<T> get_submatrix(const Matrix3D<T> &mat, const int &remove_row, const int &remove_col)
         {
             std::vector< std::vector<T> > new_mat{};
             for(int i=0; i < mat.row; i++){
@@ -121,14 +121,14 @@ namespace Ray_Tracer{
             return tmp;
         }
 
-        static T calculate_minor(const Matrix3D<T> mat, int row, int col)
+        static T calculate_minor(const Matrix3D<T> &mat, const int &row, const int &col)
         {
             Matrix3D<float> b = get_submatrix(mat, row, col);
             float minor = Matrix3D<float>::calculate_determinant(b);
             return minor;
         }
 
-        static T calculate_cofactor(const Matrix3D<T> mat, int row, int col)
+        static T calculate_cofactor(const Matrix3D<T> &mat, const int &row, const int &col)
         {
             T minor = calculate_minor(mat, row, col);
             if((row + col) % 2 == 1){
@@ -148,7 +148,7 @@ namespace Ray_Tracer{
             return id_matrix;
         }
 
-        static Matrix3D<T> translate(T x, T y, T z){
+        static Matrix3D<T> translate(const T &x, const T &y, const T &z){
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[0][3] = x;
             tranlate_matrix.matrix[1][3] = y;
@@ -157,7 +157,7 @@ namespace Ray_Tracer{
             return tranlate_matrix;
         }
 
-        static Matrix3D<T> scaling(T x, T y, T z)
+        static Matrix3D<T> scaling(const T &x, const T &y, const T &z)
         {
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[0][0] = x;
@@ -167,7 +167,7 @@ namespace Ray_Tracer{
             return tranlate_matrix;
         }
 
-        static Matrix3D<T> rotation_x(float radians)
+        static Matrix3D<T> rotation_x(const float &radians)
         {
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[1][1] =  std::cos(radians);
@@ -177,7 +177,7 @@ namespace Ray_Tracer{
             return tranlate_matrix;
         }
 
-        static Matrix3D<T> rotation_y(float radians)
+        static Matrix3D<T> rotation_y(const float &radians)
         {
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[0][0] = std::cos(radians);
@@ -187,7 +187,7 @@ namespace Ray_Tracer{
             return tranlate_matrix;
         }
 
-        static Matrix3D<T> rotation_z(float radians)
+        static Matrix3D<T> rotation_z(const float &radians)
         {
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[0][0] = std::cos(radians);
@@ -197,7 +197,7 @@ namespace Ray_Tracer{
             return tranlate_matrix;
         }
 
-        static Matrix3D<T> shearing(T xy, T xz, T yx, T yz, T zx, T zy)
+        static Matrix3D<T> shearing(const T &xy, const T &xz, const T &yx, const T &yz, const T &zx, const T &zy)
         {
             Matrix3D<T> tranlate_matrix = get_generic_identity_matrix();
             tranlate_matrix.matrix[0][1] = xy;
@@ -211,7 +211,7 @@ namespace Ray_Tracer{
     };
 
     template <typename T>
-    bool isEqual(T x, T y)
+    bool isEqual(const T &x, const T &y)
     {
         const T epsilon = 0.01/* some small number such as 1e-5 */;
         return std::abs(x - y) <= epsilon * std::abs(x);

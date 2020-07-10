@@ -20,7 +20,7 @@ namespace Ray_Tracer
     public:
         RayForPixel3D(){}
         
-        static Ray3D<T> ray_for_pixel(Camera3D<T> camera, T x, T y){
+        static Ray3D<T> ray_for_pixel(const Camera3D<T> &camera, const T &x, const T &y){
             T xoffset = (x + 0.5) * camera.pixel_size;
             T yoffset = (y + 0.5) * camera.pixel_size;
 

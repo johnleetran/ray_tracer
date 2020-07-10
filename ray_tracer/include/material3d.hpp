@@ -18,12 +18,12 @@ namespace Ray_Tracer
         Material3D() {}
 
         static Ray_Tracer::Color3D<T> lighting(
-            Material3D<T> material,
-            Ray_Tracer::PointLight3D<T> light,
-            Ray_Tracer::Tuple3D<T> point,
-            Ray_Tracer::Vec3D<T> eyev,
-            Ray_Tracer::Vec3D<T> normalv,
-            bool in_shadow
+            const Material3D<T> &material,
+            const Ray_Tracer::PointLight3D<T> &light,
+            const Ray_Tracer::Tuple3D<T> &point,
+            const Ray_Tracer::Vec3D<T> &eyev,
+            const Ray_Tracer::Vec3D<T> &normalv,
+            const bool &in_shadow
             )
         {
 

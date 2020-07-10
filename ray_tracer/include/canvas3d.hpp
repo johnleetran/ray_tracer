@@ -24,7 +24,7 @@ namespace Ray_Tracer
         const int color_clamp = 255;
         //std::vector<Ray_Tracer::Color3D<float>> colors;
         std::vector<std::vector<Ray_Tracer::Color3D<T>>> colors;
-        Canvas3D(T width, T height) : width(width), height(height)
+        Canvas3D(const T &width, const T &height) : width(width), height(height)
         {
             for(int i = 0; i < width; i++){
                 colors.push_back(std::vector<Ray_Tracer::Color3D<T>>{});
@@ -35,54 +35,54 @@ namespace Ray_Tracer
             }
         }
 
-        void write_pixels(int x, int y, Ray_Tracer::Color3D<T> color){
+        void write_pixels(const int &x, const int &y, const Ray_Tracer::Color3D<T> &color){
             //colors[x][height - y] = color;
             colors[x][y] = color;
         }
 
-        // std::vector<std::vector<Color3D<T>>> render(Camera3D<T> camera, World3D<T> world){
-        //     for(int y = 0; y < camera.vsize; y++){
-        //         for(int x =0; x < camera.hsize; x++){
-        //             Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
-        //             Color3D<T> c = world.color_at(ray);
-        //             write_pixels(x, y, c);
-        //             std::cout << "x: " << x << " y: " << y << std::endl;
-        //             if(x == 0){
-        //                 canvas_to_ppm("./preview.ppm");
-        //             }
-        //         }
-        //     }
-        //     return colors;
-        // }
+         std::vector<std::vector<Color3D<T>>> render(const Camera3D<T> &camera, const World3D<T> &world){
+             for(int y = 0; y < camera.vsize; y++){
+                 for(int x =0; x < camera.hsize; x++){
+                     Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
+                     Color3D<T> c = world.color_at(ray);
+                     write_pixels(x, y, c);
+                     std::cout << "x: " << x << " y: " << y << std::endl;
+                     if(x % 200 == 0){
+                         canvas_to_ppm("./preview.ppm");
+                     }
+                 }
+             }
+             return colors;
+         }
 
         std::mutex mtx;
-        std::vector<std::vector<Color3D<T>>> render(Camera3D<T> &camera, World3D<T> &world){
-            int offset = camera.vsize / 4;
-
-            auto h1 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, 0, offset, true);
-            });
-
-            auto h2 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset, offset*2, false);
-            });
-
-            auto h3 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset * 2, offset * 3, false);
-            });
-
-            auto h4 = std::async(std::launch::async, [&] {
-                render_helper(camera, world, 0, camera.hsize, offset * 3, camera.vsize, false);
-            });
-
-            h1.get();
-            h2.get();
-            h3.get();
-            h4.get();
-
-
-            return colors;
-        }
+//        std::vector<std::vector<Color3D<T>>> render(Camera3D<T> &camera, World3D<T> &world){
+//            int offset = camera.vsize / 4;
+//
+//            auto h1 = std::async(std::launch::async, [&] {
+//                render_helper(camera, world, 0, camera.hsize, 0, offset, true);
+//            });
+//
+//            auto h2 = std::async(std::launch::async, [&] {
+//                render_helper(camera, world, 0, camera.hsize, offset, offset*2, false);
+//            });
+//
+//            auto h3 = std::async(std::launch::async, [&] {
+//                render_helper(camera, world, 0, camera.hsize, offset * 2, offset * 3, false);
+//            });
+//
+//            auto h4 = std::async(std::launch::async, [&] {
+//                render_helper(camera, world, 0, camera.hsize, offset * 3, camera.vsize, false);
+//            });
+//
+//            h1.get();
+//            h2.get();
+//            h3.get();
+//            h4.get();
+//
+//
+//            return colors;
+//        }
 
         std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int from_x, int to_x, int from_y, int to_y, bool enable_preview)
         {

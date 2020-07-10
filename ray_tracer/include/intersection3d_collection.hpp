@@ -29,7 +29,7 @@
             });
         } 
 
-        Intersection3D<T> get(int index){
+        Intersection3D<T> get(const int &index){
             return collection[index];
         }
 

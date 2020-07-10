@@ -38,7 +38,7 @@ namespace Ray_Tracer
                 objects.push_back(sphere2);
             }
 
-            Intersection3D_Collection<T> intersect_world(Ray3D<T> ray)
+            Intersection3D_Collection<T> intersect_world(const Ray3D<T> &ray) const
             {
                 Intersection3D_Collection<T> intersection_collection;
 
@@ -75,7 +75,7 @@ namespace Ray_Tracer
                 return comps;
             }
 
-            Color3D<T> shade_hit(Comps3D<T> comps){
+            Color3D<T> shade_hit(const Comps3D<T> &comps) const {
                 bool in_shadow = is_shadowed(comps.over_point);
                 Color3D<T> lighting = Material3D<T>::lighting(
                     comps.object.material,
@@ -87,7 +87,7 @@ namespace Ray_Tracer
                 return lighting;
             }
 
-            Color3D<T> color_at(Ray3D<T> ray){
+            Color3D<T> color_at(const Ray3D<T> &ray) const {
                 Color3D<T> the_color{0,0,0};
                 Intersection3D_Collection<T> inter_collection = intersect_world(ray);
                 std::optional<Intersection3D<T>> hit = inter_collection.get_hit();
@@ -103,7 +103,7 @@ namespace Ray_Tracer
                 objects.clear();
             }
 
-            bool is_shadowed(Tuple3D<T> point){
+            bool is_shadowed(const Tuple3D<T> &point) const {
                 Tuple3D<T> v = light.position - point;
                 float distance = v.magnitude();
                 Vec3D<T> direction{v.normalize().x, v.normalize().y, v.normalize().z};

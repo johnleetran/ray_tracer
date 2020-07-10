@@ -15,7 +15,7 @@ namespace Ray_Tracer
 
         Vec3D() : x(0), y(0), z(0) {}
         Vec3D(T x, T y, T z) : x(x), y(y), z(z){}
-        T magnitude()
+        T magnitude() const
         {
             T res_x = x * x;
             T res_y = y * y;
@@ -25,7 +25,7 @@ namespace Ray_Tracer
             return mag;
         }
 
-        Vec3D<T> normalize()
+        Vec3D<T> normalize() const
         {
             Vec3D t1{x,y,z};
             T res_x = x / magnitude();
@@ -36,7 +36,7 @@ namespace Ray_Tracer
             return normalized;
         }
 
-        T dot(Vec3D<T> t1)
+        T dot(const Vec3D<T> &t1) const
         {
             T res_x = t1.x * x;
             T res_y = t1.y * y;
@@ -46,7 +46,7 @@ namespace Ray_Tracer
             return dot;
         }
 
-        Vec3D<T> cross(Vec3D<T> t2)
+        Vec3D<T> cross(const Vec3D<T> &t2) const
         {
             Vec3D<T> t1 = *this;
             T x = t1.y * t2.z - t1.z * t2.y;

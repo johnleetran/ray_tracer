@@ -24,7 +24,7 @@ namespace Ray_Tracer{
                 return origin + direction * t;
             }
 
-            Ray3D<T> transform(Ray_Tracer::Matrix3D<T> mat){
+            Ray3D<T> transform(Ray_Tracer::Matrix3D<T> mat) {
                 Ray_Tracer::Tuple3D<T> new_origin = mat * origin;
                 Ray_Tracer::Vec3D<T> new_direction = mat * direction;
                 Ray3D ray{new_origin, new_direction};

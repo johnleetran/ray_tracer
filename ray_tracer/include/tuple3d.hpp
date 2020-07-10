@@ -15,7 +15,7 @@ namespace Ray_Tracer{
         int size = 4;
         Tuple3D() : x(0), y(0), z(0), w(0){};
         Tuple3D(T x, T y, T z, T w = 1):x(x),y(y),z(z),w(w){}
-        T magnitude()
+        T magnitude() const
         {
             T new_x = x * x;
             T new_y = y * y;
@@ -26,7 +26,7 @@ namespace Ray_Tracer{
             return mag;
         }
 
-        T getValueByIndex(int index) const
+        T getValueByIndex(const int &index) const
         {
             if(index == 0){
                 return x;
@@ -46,7 +46,7 @@ namespace Ray_Tracer{
             return 0;
         }
 
-        Tuple3D<T> normalize()
+        Tuple3D<T> normalize() const
         {
             Tuple3D<T> t1{x,y,z,w};
             T new_x = x / magnitude();
@@ -58,7 +58,7 @@ namespace Ray_Tracer{
             return normalized;
         }
 
-        T dot(Tuple3D<T> t1)
+        T dot(const Tuple3D<T> &t1) const
         {
             T new_x = t1.x * x;
             T new_y = t1.y * y;

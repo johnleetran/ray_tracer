@@ -17,7 +17,7 @@ namespace Ray_Tracer
 
         Color3D(T r, T g, T b) : r(r), g(g), b(b) {  }
 
-        Color3D<T> scale(T multiplier)
+        Color3D<T> scale(const T &multiplier) const
         {
             T new_r = r * multiplier;
             T new_g = g * multiplier;
@@ -62,7 +62,7 @@ namespace Ray_Tracer
     }
 
     template <typename T>
-    Color3D<T> operator*(const Color3D<T> &t1, T multiplier)
+    Color3D<T> operator*(const Color3D<T> &t1, const T &multiplier) 
     {
         T new_r = t1.r * multiplier;
         T new_g = t1.g * multiplier;

@@ -28,7 +28,7 @@ namespace Ray_Tracer
         T pixel_size;
 
         Camera3D(){}
-        Camera3D(T hsize, T vsize, T field_of_view):hsize(hsize), vsize(vsize), field_of_view(field_of_view) {
+        Camera3D(const T &hsize, const T &vsize, const T &field_of_view):hsize(hsize), vsize(vsize), field_of_view(field_of_view) {
             transform_matrix = Matrix3D<T>::get_generic_identity_matrix();
             pixel_size = calculate_pixel_size();
         }
@@ -47,7 +47,7 @@ namespace Ray_Tracer
             return half_width * 2.f / hsize;
         }
 
-        static Matrix3D<T> view_transform(Tuple3D<T> from, Tuple3D<T> to, Vec3D<T> up)
+        static Matrix3D<T> view_transform(const Tuple3D<T> &from, const Tuple3D<T> &to, const Vec3D<T> &up)
         {
             Tuple3D<T> tmp = to - from;
             Tuple3D<T> foward_tuple = tmp.normalize();

@@ -26,7 +26,8 @@ namespace Ray_Tracer
             transform_matrix = Ray_Tracer::Matrix3D<T>::get_generic_identity_matrix();
         }
 
-        Ray_Tracer::Matrix3D<T> get_transform(){
+        Ray_Tracer::Matrix3D<T> get_transform() const
+        {
             return transform_matrix;
         }
 
@@ -35,7 +36,7 @@ namespace Ray_Tracer
             transform_matrix = mat * transform_matrix;
         }
 
-        Ray_Tracer::Vec3D<T> normal_at(Ray_Tracer::Tuple3D<T> point)
+        Ray_Tracer::Vec3D<T> normal_at(const Ray_Tracer::Tuple3D<T> &point) const
         {
             Ray_Tracer::Tuple3D<T> object_point = transform_matrix.get_inverse() * point;
             Ray_Tracer::Tuple3D<T> object_normal = object_point - origin;
