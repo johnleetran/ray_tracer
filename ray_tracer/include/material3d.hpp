@@ -22,7 +22,9 @@ namespace Ray_Tracer
             Ray_Tracer::PointLight3D<T> light,
             Ray_Tracer::Tuple3D<T> point,
             Ray_Tracer::Vec3D<T> eyev,
-            Ray_Tracer::Vec3D<T> normalv)
+            Ray_Tracer::Vec3D<T> normalv,
+            bool in_shadow
+            )
         {
 
             Ray_Tracer::Color3D<T> effective_color = material.color * light.intensity;
@@ -38,7 +40,7 @@ namespace Ray_Tracer
                 diffuse = Ray_Tracer::Color3D<T>{0.0f, 0.0f, 0.0f};
                 specular = Ray_Tracer::Color3D<T>{0.0f, 0.0f, 0.0f};
             }
-            else
+            else if(!in_shadow)
             {
                 diffuse = effective_color * material.diffuse * light_dot_normal;
                 Ray_Tracer::Vec3D<T> reflectv = Ray_Tracer::Vec3D<T>::reflect(-lightv, normalv);

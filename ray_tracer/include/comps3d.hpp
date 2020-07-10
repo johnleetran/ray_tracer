@@ -23,6 +23,7 @@ namespace Ray_Tracer
         Vec3D<T> eyev;
         Vec3D<T> normalv;
         bool inside;
+        Tuple3D<T> over_point;
         Comps3D(){}
 
         Comps3D(T t, Sphere3D<T> object, Tuple3D<T> point, Vec3D<T> eyev, Vec3D<T> normalv, bool inside) : t(t), object(object), point(point), eyev(eyev), normalv(normalv), inside(inside)

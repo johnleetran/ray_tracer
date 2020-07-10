@@ -68,17 +68,23 @@ namespace Ray_Tracer
                 }else{
                     comps.inside = false;
                 }
+
+                T epsilon = 0.01;
+                //std::numeric_limits<T>::epsilon();
+                comps.over_point = comps.point + comps.normalv * epsilon;
                 return comps;
             }
 
             Color3D<T> shade_hit(Comps3D<T> comps){
+                bool in_shadow = is_shadowed(comps.over_point);
                 Color3D<T> lighting = Material3D<T>::lighting(
                     comps.object.material,
                     light,
                     comps.point,
                     comps.eyev,
-                    comps.normalv);
-                    return lighting;
+                    comps.normalv,
+                    in_shadow);
+                return lighting;
             }
 
             Color3D<T> color_at(Ray3D<T> ray){
@@ -95,6 +101,21 @@ namespace Ray_Tracer
 
             void clear_objects(){
                 objects.clear();
+            }
+
+            bool is_shadowed(Tuple3D<T> point){
+                Tuple3D<T> v = light.position - point;
+                float distance = v.magnitude();
+                Vec3D<T> direction{v.normalize().x, v.normalize().y, v.normalize().z};
+
+                Ray3D<T> r { point, direction };
+                Intersection3D_Collection<T> inter_collection = intersect_world(r);
+                std::optional<Intersection3D<T>> hit = inter_collection.get_hit();
+                if (hit && hit->t < distance){
+                    return true;
+                }else{
+                    return false;
+                }
             }
     };
 }

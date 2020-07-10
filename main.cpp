@@ -191,7 +191,7 @@ int render_sphere_with_lights(Canvas3D<float> *canvas, float width, float height
                     Tuple3D<float> point = ray.position(hit->t);
                     Vec3D<float> normal = hit->object.normal_at(point);
                     Vec3D<float> eye = -ray.direction;
-                    Color3D<float> color = Material3D<float>::lighting(hit->object.material, light, point, eye, normal);
+                    Color3D<float> color = Material3D<float>::lighting(hit->object.material, light, point, eye, normal, false);
                     canvas->write_pixels(x, y, color);
                 }
             }
@@ -231,8 +231,8 @@ int render_sphere_with_lights_threads()
 
 int render_room_with_sphere()
 {
-    float width = 500;
-    float height = 250;
+    float width = 50;
+    float height = 25;
 
     //floor
     Sphere3D<float> floor{1.f, "floor"};
