@@ -56,61 +56,96 @@ namespace Ray_Tracer
 
         std::mutex mtx;
         std::vector<std::vector<Color3D<T>>> render(Camera3D<T> &camera, World3D<T> &world){
-            auto h1 = std::async(std::launch::async, [&] { render_helper(camera, world, 1); });
-            auto h2 = std::async(std::launch::async, [&] { render_helper(camera, world, 2); });
-            auto h3 = std::async(std::launch::async, [&] { render_helper(camera, world, 3); });
-            auto h4 = std::async(std::launch::async, [&] { render_helper(camera, world, 4); });
-            auto h5 = std::async(std::launch::async, [&] { render_helper(camera, world, 5); });
-            auto h6 = std::async(std::launch::async, [&] { render_helper(camera, world, 6); });
+            int offset = camera.vsize / 4;
+
+            auto h1 = std::async(std::launch::async, [&] {
+                render_helper(camera, world, 0, camera.hsize, 0, offset);
+            });
+
+            auto h2 = std::async(std::launch::async, [&] {
+                render_helper(camera, world, 0, camera.hsize, offset, offset*2);
+            });
+
+            auto h3 = std::async(std::launch::async, [&] {
+                render_helper(camera, world, 0, camera.hsize, offset * 2, offset * 3);
+            });
+
+            auto h4 = std::async(std::launch::async, [&] {
+                render_helper(camera, world, 0, camera.hsize, offset * 3, camera.vsize);
+            });
 
             h1.get();
             h2.get();
             h3.get();
             h4.get();
-            h5.get();
-            h6.get();
+
 
             return colors;
         }
 
-        std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int seed)
+        std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int from_x, int to_x, int from_y, int to_y)
         {
-            int min_x = 0;
-            int max_x = camera.hsize;
-            int min_y = 0;
-            int max_y = camera.vsize;
-            std::atomic<int> total_count = 0;
-            float max_count = max_x * max_y;
-            std::unordered_map<std::string, bool> has_seen{};
-            srand(seed);
-
-            while(true){                
-                int x = rand() % (max_x - min_x) + min_x;
-                int y = rand() % (max_y - min_y) + min_y;
-                //std::cout << "x: " << x << " y: " << y << std::endl;
-                std::string s = std::to_string(x) + "," + std::to_string(y);
-                if (has_seen.find(s) == has_seen.end())
+            for (int y = from_y; y < to_y; y++)
+            {
+                for (int x = from_x; x < to_x; x++)
                 {
-                    std::cout << total_count << std::endl;
-                    has_seen[s] = true;
                     Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
                     Color3D<T> c = world.color_at(ray);
                     write_pixels(x, y, c);
-
-                    if (total_count%500 == 0 && seed == 1)
+                    std::cout << "x: " << x << " y: " << y << std::endl;
+                    if (x == to_x - 1)
                     {
                         mtx.lock();
                         canvas_to_ppm("./preview.ppm");
                         mtx.unlock();
                     }
-                    total_count++;
-                }else{
-                    std::cout << "skipping because it has been seen " << s << std::endl;
                 }
-                std::cout << total_count / max_count << std::endl;;
             }
+            canvas_to_ppm("./image.ppm");
             return colors;
         }
+
+        // std::vector<std::vector<Color3D<T>>> render_helper(Camera3D<T> &camera, World3D<T> &world, int seed)
+        // {
+        //     int min_x = 0;
+        //     int max_x = camera.hsize;
+        //     int min_y = 0;
+        //     int max_y = camera.vsize;
+        //     std::atomic<int> total_count = 0;
+        //     float max_count = max_x * max_y;
+        //     float precentage_done = 0.0;
+        //     std::unordered_map<std::string, bool> has_seen{};
+        //     srand(seed);
+
+        //     while (precentage_done < 1.0)
+        //     {
+        //         int x = rand() % (max_x - min_x) + min_x;
+        //         int y = rand() % (max_y - min_y) + min_y;
+        //         //std::cout << "x: " << x << " y: " << y << std::endl;
+        //         std::string s = std::to_string(x) + "," + std::to_string(y);
+        //         if (has_seen.find(s) == has_seen.end())
+        //         {
+        //             //std::cout << total_count << std::endl;
+        //             has_seen[s] = true;
+        //             Ray3D<T> ray = RayForPixel3D<T>::ray_for_pixel(camera, x, y);
+        //             Color3D<T> c = world.color_at(ray);
+        //             write_pixels(x, y, c);
+
+        //             if (total_count%500 == 0 && seed == 1)
+        //             {
+        //                 mtx.lock();
+        //                 canvas_to_ppm("./preview.ppm");
+        //                 mtx.unlock();
+        //             }
+        //             total_count++;
+        //         }else{
+        //             std::cout << "skipping because it has been seen " << s << std::endl;
+        //         }
+        //         precentage_done = total_count / max_count;
+        //         std::cout << precentage_done << std::endl;
+        //     }
+        //     return colors;
+        // }
 
         Ray_Tracer::Color3D<T> getPixel(int x, int y)
         {

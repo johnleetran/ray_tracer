@@ -231,8 +231,8 @@ int render_sphere_with_lights_threads()
 
 int render_room_with_sphere()
 {
-    float width = 500;
-    float height = 250;
+    float width = 200;
+    float height = 100;
 
     //floor
     Sphere3D<float> floor{1.f, "floor"};
