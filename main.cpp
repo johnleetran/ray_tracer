@@ -231,8 +231,8 @@ int render_sphere_with_lights_threads()
 
 int render_room_with_sphere()
 {
-    float width = 50;
-    float height = 25;
+    float width = 500;
+    float height = 250;
 
     //floor
     Sphere3D<float> floor{1.f, "floor"};
@@ -300,7 +300,8 @@ int render_room_with_sphere()
     Canvas3D<float> canvas{width, height};
 
     canvas.render(c, w);
-    canvas.canvas_to_ppm("./image-main.ppm");
+    
+    //canvas.canvas_to_ppm("./image-main.ppm");
     return 0;
 }
 
